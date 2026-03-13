@@ -1,0 +1,409 @@
+datasets:
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 103.9
+    exp_growth_rate: 0.053610867865073714
+    exp_start: 0.0
+    exp_steady_state: 31135755.55555556
+    model_growth_rate: 0.07320711139114766
+    model_steady_state: 35079777.31028153
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 103.9
+    exp_growth_rate: 0.047515992235087165
+    exp_start: 0.0
+    exp_steady_state: 20307866.66666666
+    model_growth_rate: 0.06814769049507538
+    model_steady_state: 22183451.516338464
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 79.85
+    exp_growth_rate: 0.04938943066581929
+    exp_start: 0.0
+    exp_steady_state: 6432311.111111113
+    model_growth_rate: 0.0597862169197793
+    model_steady_state: 10847473.801524246
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 79.85
+    exp_growth_rate: 0.0442905600592737
+    exp_start: 0.0
+    exp_steady_state: 2754669.444444445
+    model_growth_rate: 0.047338178259016886
+    model_steady_state: 4554659.305025491
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 103.9
+    exp_growth_rate: 0.028697388199725244
+    exp_start: 0.0
+    exp_steady_state: 1316195.5555555562
+    model_growth_rate: 0.03189988188526224
+    model_steady_state: 1289689.596840524
+  date: 16-09-24
+  experimental_growth_rates:
+    C0*0.062: 0.028697388199725244
+    C0*0.125: 0.0442905600592737
+    C0*0.25: 0.04938943066581929
+    C0*0.5: 0.047515992235087165
+    C0*1.0: 0.053610867865073714
+  experimental_steady_states:
+    C0*0.062: 1316195.5555555562
+    C0*0.125: 2754669.444444445
+    C0*0.25: 6432311.111111113
+    C0*0.5: 20307866.66666666
+    C0*1.0: 31135755.55555556
+  filepath: ../all_data/data_exp_Chlamy_16-09-24.csv
+  light_intensity: 22
+  model_growth_rates:
+    C0*0.062: 0.03189988188526224
+    C0*0.125: 0.047338178259016886
+    C0*0.25: 0.0597862169197793
+    C0*0.5: 0.06814769049507538
+    C0*1.0: 0.07320711139114766
+  model_steady_states:
+    C0*0.062: 1289689.596840524
+    C0*0.125: 4554659.305025491
+    C0*0.25: 10847473.801524246
+    C0*0.5: 22183451.516338464
+    C0*1.0: 35079777.31028153
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 77.61666666666666
+    exp_growth_rate: 0.07635603645690596
+    exp_start: 6.133333333333334
+    exp_steady_state: 46334444.4444445
+    model_growth_rate: 0.09134761839009652
+    model_steady_state: 45183316.531648785
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 46.11666666666667
+    exp_growth_rate: 0.07652677821634135
+    exp_start: 6.133333333333334
+    exp_steady_state: 19035940.74074075
+    model_growth_rate: 0.08523081915210795
+    model_steady_state: 24994836.216746137
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 55.78333333333333
+    exp_growth_rate: 0.08434805411685302
+    exp_start: 6.133333333333334
+    exp_steady_state: 10537162.962962968
+    model_growth_rate: 0.07496236069423534
+    model_steady_state: 12092249.350717103
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 46.11666666666667
+    exp_growth_rate: 0.08601744895968039
+    exp_start: 6.133333333333334
+    exp_steady_state: 5829385.185185184
+    model_growth_rate: 0.05998839571400357
+    model_steady_state: 5392640.911792247
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 55.78333333333333
+    exp_growth_rate: 0.05977951280603869
+    exp_start: 6.133333333333334
+    exp_steady_state: 2880003.7037037034
+    model_growth_rate: 0.04142093628372178
+    model_steady_state: 1977394.2110128729
+  date: 21-10-24
+  experimental_growth_rates:
+    C0*0.062: 0.05977951280603869
+    C0*0.125: 0.08601744895968039
+    C0*0.25: 0.08434805411685302
+    C0*0.5: 0.07652677821634135
+    C0*1.0: 0.07635603645690596
+  experimental_steady_states:
+    C0*0.062: 2880003.7037037034
+    C0*0.125: 5829385.185185184
+    C0*0.25: 10537162.962962968
+    C0*0.5: 19035940.74074075
+    C0*1.0: 46334444.4444445
+  filepath: ../all_data/data_exp_Chlamy_21-10-24.csv
+  light_intensity: 45
+  model_growth_rates:
+    C0*0.062: 0.04142093628372178
+    C0*0.125: 0.05998839571400357
+    C0*0.25: 0.07496236069423534
+    C0*0.5: 0.08523081915210795
+    C0*1.0: 0.09134761839009652
+  model_steady_states:
+    C0*0.062: 1977394.2110128729
+    C0*0.125: 5392640.911792247
+    C0*0.25: 12092249.350717103
+    C0*0.5: 24994836.216746137
+    C0*1.0: 45183316.531648785
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 31.316666666666666
+    exp_growth_rate: 0.08965237478565964
+    exp_start: 9.166666666666666
+    exp_steady_state: 62876088.88888881
+    model_growth_rate: 0.09134761839009652
+    model_steady_state: 45183316.531648785
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 57.833333333333336
+    exp_growth_rate: 0.08268149425144265
+    exp_start: 9.166666666666666
+    exp_steady_state: 23301022.22222222
+    model_growth_rate: 0.08523081915210795
+    model_steady_state: 24994836.216746137
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 54.766666666666666
+    exp_growth_rate: 0.08460929967583772
+    exp_start: 9.166666666666666
+    exp_steady_state: 12049928.88888889
+    model_growth_rate: 0.07496236069423534
+    model_steady_state: 12092249.350717103
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 53.81666666666667
+    exp_growth_rate: 0.08014630021287646
+    exp_start: 9.166666666666666
+    exp_steady_state: 6172640.0
+    model_growth_rate: 0.05998839571400357
+    model_steady_state: 5392640.911792247
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 54.766666666666666
+    exp_growth_rate: 0.06400954549691829
+    exp_start: 9.166666666666666
+    exp_steady_state: 3360857.777777777
+    model_growth_rate: 0.04142093628372178
+    model_steady_state: 1977394.2110128729
+  date: 04-11-24
+  experimental_growth_rates:
+    C0*0.062: 0.06400954549691829
+    C0*0.125: 0.08014630021287646
+    C0*0.25: 0.08460929967583772
+    C0*0.5: 0.08268149425144265
+    C0*1.0: 0.08965237478565964
+  experimental_steady_states:
+    C0*0.062: 3360857.777777777
+    C0*0.125: 6172640.0
+    C0*0.25: 12049928.88888889
+    C0*0.5: 23301022.22222222
+    C0*1.0: 62876088.88888881
+  filepath: ../all_data/data_exp_Chlamy_04-11-24.csv
+  light_intensity: 45
+  model_growth_rates:
+    C0*0.062: 0.04142093628372178
+    C0*0.125: 0.05998839571400357
+    C0*0.25: 0.07496236069423534
+    C0*0.5: 0.08523081915210795
+    C0*1.0: 0.09134761839009652
+  model_steady_states:
+    C0*0.062: 1977394.2110128729
+    C0*0.125: 5392640.911792247
+    C0*0.25: 12092249.350717103
+    C0*0.5: 24994836.216746137
+    C0*1.0: 45183316.531648785
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 55.65
+    exp_growth_rate: 0.09201644413734596
+    exp_start: 0.0
+    exp_steady_state: 65801518.51851851
+    model_growth_rate: 0.10143292053212918
+    model_steady_state: 50733227.494730145
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 55.65
+    exp_growth_rate: 0.0848814149867195
+    exp_start: 0.0
+    exp_steady_state: 34153688.888888896
+    model_growth_rate: 0.09473312851331175
+    model_steady_state: 26125812.109023422
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 55.65
+    exp_growth_rate: 0.07640817712020209
+    exp_start: 0.0
+    exp_steady_state: 16310385.1851852
+    model_growth_rate: 0.08347679293212422
+    model_steady_state: 12607008.833016723
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 55.65
+    exp_growth_rate: 0.06504560445338156
+    exp_start: 0.0
+    exp_steady_state: 8313770.370370367
+    model_growth_rate: 0.06701705644260457
+    model_steady_state: 5735969.34337786
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 55.65
+    exp_growth_rate: 0.05208238337397105
+    exp_start: 0.0
+    exp_steady_state: 4612631.111111105
+    model_growth_rate: 0.04667956606767861
+    model_steady_state: 2253700.6414064723
+  date: 17-02-25
+  experimental_growth_rates:
+    C0*0.062: 0.05208238337397105
+    C0*0.125: 0.06504560445338156
+    C0*0.25: 0.07640817712020209
+    C0*0.5: 0.0848814149867195
+    C0*1.0: 0.09201644413734596
+  experimental_steady_states:
+    C0*0.062: 4612631.111111105
+    C0*0.125: 8313770.370370367
+    C0*0.25: 16310385.1851852
+    C0*0.5: 34153688.888888896
+    C0*1.0: 65801518.51851851
+  filepath: ../all_data/data_exp_Chlamy_17-02-25.csv
+  light_intensity: 90
+  model_growth_rates:
+    C0*0.062: 0.04667956606767861
+    C0*0.125: 0.06701705644260457
+    C0*0.25: 0.08347679293212422
+    C0*0.5: 0.09473312851331175
+    C0*1.0: 0.10143292053212918
+  model_steady_states:
+    C0*0.062: 2253700.6414064723
+    C0*0.125: 5735969.34337786
+    C0*0.25: 12607008.833016723
+    C0*0.5: 26125812.109023422
+    C0*1.0: 50733227.494730145
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 56.983333333333334
+    exp_growth_rate: 0.11107557695119902
+    exp_start: 0.0
+    exp_steady_state: 57806555.5506
+    model_growth_rate: 0.1037974711501889
+    model_steady_state: 53159721.1456156
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 56.983333333333334
+    exp_growth_rate: 0.09997183933079881
+    exp_start: 0.0
+    exp_steady_state: 32885066.66741
+    model_growth_rate: 0.09696105207665259
+    model_steady_state: 26616506.024402566
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 56.983333333333334
+    exp_growth_rate: 0.08889341403489821
+    exp_start: 0.0
+    exp_steady_state: 17520366.66741
+    model_growth_rate: 0.08547416925658799
+    model_steady_state: 12813791.841535905
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 76.93333333333334
+    exp_growth_rate: 0.06112677113107023
+    exp_start: 0.0
+    exp_steady_state: 9422988.88988
+    model_growth_rate: 0.06857357290442441
+    model_steady_state: 5850288.751395291
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 76.93333333333334
+    exp_growth_rate: 0.05345510457884569
+    exp_start: 0.0
+    exp_steady_state: 5100257.77753
+    model_growth_rate: 0.047911338659763464
+    model_steady_state: 2327482.600640606
+  date: 01-07-25
+  experimental_growth_rates:
+    C0*0.062: 0.05345510457884569
+    C0*0.125: 0.06112677113107023
+    C0*0.25: 0.08889341403489821
+    C0*0.5: 0.09997183933079881
+    C0*1.0: 0.11107557695119902
+  experimental_steady_states:
+    C0*0.062: 5100257.77753
+    C0*0.125: 9422988.88988
+    C0*0.25: 17520366.66741
+    C0*0.5: 32885066.66741
+    C0*1.0: 57806555.5506
+  filepath: ../all_data/data_exp_Chlamy_01-07-25.csv
+  light_intensity: 180
+  model_growth_rates:
+    C0*0.062: 0.047911338659763464
+    C0*0.125: 0.06857357290442441
+    C0*0.25: 0.08547416925658799
+    C0*0.5: 0.09696105207665259
+    C0*1.0: 0.1037974711501889
+  model_steady_states:
+    C0*0.062: 2327482.600640606
+    C0*0.125: 5850288.751395291
+    C0*0.25: 12813791.841535905
+    C0*0.5: 26616506.024402566
+    C0*1.0: 53159721.1456156
+- conditions:
+  - c0_factor: 1.0
+    condition: C0*1.0
+    exp_end: 45.733333333333334
+    exp_growth_rate: 0.14215615903711915
+    exp_start: 0.0
+    exp_steady_state: 55596377.777777754
+    model_growth_rate: 0.10067453714548541
+    model_steady_state: 53993763.3181925
+  - c0_factor: 0.5
+    condition: C0*0.5
+    exp_end: 45.733333333333334
+    exp_growth_rate: 0.13162417426730236
+    exp_start: 0.0
+    exp_steady_state: 36130955.55555555
+    model_growth_rate: 0.09401863232121084
+    model_steady_state: 26779416.272401683
+  - c0_factor: 0.25
+    condition: C0*0.25
+    exp_end: 45.733333333333334
+    exp_growth_rate: 0.12160200224004229
+    exp_start: 0.0
+    exp_steady_state: 19277111.111111127
+    model_growth_rate: 0.08283631132880595
+    model_steady_state: 12848778.26924765
+  - c0_factor: 0.125
+    condition: C0*0.125
+    exp_end: 63.25
+    exp_growth_rate: 0.08287339499294517
+    exp_start: 0.0
+    exp_steady_state: 10381888.8888889
+    model_growth_rate: 0.06648782122571355
+    model_steady_state: 5830977.359276011
+  - c0_factor: 0.062
+    condition: C0*0.062
+    exp_end: 63.25
+    exp_growth_rate: 0.06370286566089708
+    exp_start: 0.0
+    exp_steady_state: 5607706.666666651
+    model_growth_rate: 0.04628394599202681
+    model_steady_state: 2279949.692975476
+  date: 07-07-25
+  experimental_growth_rates:
+    C0*0.062: 0.06370286566089708
+    C0*0.125: 0.08287339499294517
+    C0*0.25: 0.12160200224004229
+    C0*0.5: 0.13162417426730236
+    C0*1.0: 0.14215615903711915
+  experimental_steady_states:
+    C0*0.062: 5607706.666666651
+    C0*0.125: 10381888.8888889
+    C0*0.25: 19277111.111111127
+    C0*0.5: 36130955.55555555
+    C0*1.0: 55596377.777777754
+  filepath: ../all_data/data_exp_Chlamy_07-07-25.csv
+  light_intensity: 300
+  model_growth_rates:
+    C0*0.062: 0.04628394599202681
+    C0*0.125: 0.06648782122571355
+    C0*0.25: 0.08283631132880595
+    C0*0.5: 0.09401863232121084
+    C0*1.0: 0.10067453714548541
+  model_steady_states:
+    C0*0.062: 2279949.692975476
+    C0*0.125: 5830977.359276011
+    C0*0.25: 12848778.26924765
+    C0*0.5: 26779416.272401683
+    C0*1.0: 53993763.3181925

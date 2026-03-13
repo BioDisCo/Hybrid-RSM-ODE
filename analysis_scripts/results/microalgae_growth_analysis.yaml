@@ -1,0 +1,427 @@
+datasets:
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 31794844.44444445
+    cells_min: 64422.22222222202
+    condition: C0*1.0
+    exp_end: 103.9
+    exp_start: 0.0
+    growth_rate: 0.053610867865073714
+    od_max: 7.12888888888889
+    od_min: 0.0144444444444444
+  - c0_factor: 0.5
+    cells_max: 21477377.777777795
+    cells_min: 78297.77777777797
+    condition: C0*0.5
+    exp_end: 103.9
+    exp_start: 0.0
+    growth_rate: 0.047515992235087165
+    od_max: 4.81555555555556
+    od_min: 0.0175555555555556
+  - c0_factor: 0.25
+    cells_max: 8325333.333333348
+    cells_min: 93660.0
+    condition: C0*0.25
+    exp_end: 79.85
+    exp_start: 0.0
+    growth_rate: 0.04938943066581929
+    od_max: 1.86666666666667
+    od_min: 0.021
+  - c0_factor: 0.125
+    cells_max: 3939666.666666665
+    cells_min: 87217.77777777797
+    condition: C0*0.125
+    exp_end: 79.85
+    exp_start: 0.0
+    growth_rate: 0.0442905600592737
+    od_max: 0.883333333333333
+    od_min: 0.0195555555555556
+  - c0_factor: 0.062
+    cells_max: 2007991.1111111103
+    cells_min: 96137.77777777797
+    condition: C0*0.062
+    exp_end: 103.9
+    exp_start: 0.0
+    growth_rate: 0.028697388199725244
+    od_max: 0.450222222222222
+    od_min: 0.0215555555555556
+  date: 16-09-24
+  filepath: ../all_data/data_exp_Chlamy_16-09-24.csv
+  fitted_parameters:
+    gamma: 2783342.613392455
+    gamma_error: 857031.9587280784
+    mu_max: 0.055729089224492
+    mu_max_error: 0.003317824702931756
+    r_squared: 0.8869529564689244
+  growth_rates:
+    C0*0.062: 0.028697388199725244
+    C0*0.125: 0.0442905600592737
+    C0*0.25: 0.04938943066581929
+    C0*0.5: 0.047515992235087165
+    C0*1.0: 0.053610867865073714
+  light_intensity: 22
+  model_performance:
+    fitted_monod_r2: 0.8869529564689244
+    logistic_r2: -9.061282135058406
+    original_monod_r2: -208.52072542697832
+  steady_states:
+    C0*0.062: 1316195.5555555562
+    C0*0.125: 2754669.444444445
+    C0*0.25: 6432311.111111113
+    C0*0.5: 20307866.66666666
+    C0*1.0: 31135755.55555556
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 49283000.0
+    cells_min: 102084.4444444445
+    condition: C0*1.0
+    exp_end: 77.61666666666666
+    exp_start: 6.133333333333334
+    growth_rate: 0.07635603645690596
+    od_max: 11.05
+    od_min: 0.0228888888888889
+  - c0_factor: 0.5
+    cells_max: 21289066.666666653
+    cells_min: 97128.88888888898
+    condition: C0*0.5
+    exp_end: 46.11666666666667
+    exp_start: 6.133333333333334
+    growth_rate: 0.07652677821634135
+    od_max: 4.77333333333333
+    od_min: 0.0217777777777778
+  - c0_factor: 0.25
+    cells_max: 13350266.666666653
+    cells_min: 105057.77777777798
+    condition: C0*0.25
+    exp_end: 55.78333333333333
+    exp_start: 6.133333333333334
+    growth_rate: 0.08434805411685302
+    od_max: 2.99333333333333
+    od_min: 0.0235555555555556
+  - c0_factor: 0.125
+    cells_max: 8062688.888888898
+    cells_min: 128844.4444444445
+    condition: C0*0.125
+    exp_end: 46.11666666666667
+    exp_start: 6.133333333333334
+    growth_rate: 0.08601744895968039
+    od_max: 1.80777777777778
+    od_min: 0.0288888888888889
+  - c0_factor: 0.062
+    cells_max: 4123022.2222222243
+    cells_min: 125375.5555555555
+    condition: C0*0.062
+    exp_end: 55.78333333333333
+    exp_start: 6.133333333333334
+    growth_rate: 0.05977951280603869
+    od_max: 0.924444444444445
+    od_min: 0.0281111111111111
+  date: 21-10-24
+  filepath: ../all_data/data_exp_Chlamy_21-10-24.csv
+  fitted_parameters:
+    gamma: 862948.2137369156
+    gamma_error: 808902.3137162746
+    mu_max: 0.08308019045284686
+    mu_max_error: 0.007097897424225032
+    r_squared: 0.3670269536632609
+  growth_rates:
+    C0*0.062: 0.05977951280603869
+    C0*0.125: 0.08601744895968039
+    C0*0.25: 0.08434805411685302
+    C0*0.5: 0.07652677821634135
+    C0*1.0: 0.07635603645690596
+  light_intensity: 45
+  model_performance:
+    fitted_monod_r2: 0.3670269536632609
+    logistic_r2: -31.46589136083874
+    original_monod_r2: -97.12658255484959
+  steady_states:
+    C0*0.062: 2880003.7037037034
+    C0*0.125: 5829385.185185184
+    C0*0.25: 10537162.962962968
+    C0*0.5: 19035940.74074075
+    C0*1.0: 46334444.4444445
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 65983222.22222202
+    cells_min: 116455.5555555555
+    condition: C0*1.0
+    exp_end: 31.316666666666666
+    exp_start: 9.166666666666666
+    growth_rate: 0.08965237478565964
+    od_max: 14.7944444444444
+    od_min: 0.0261111111111111
+  - c0_factor: 0.5
+    cells_max: 24648933.333333347
+    cells_min: 112491.11111111102
+    condition: C0*0.5
+    exp_end: 57.833333333333336
+    exp_start: 9.166666666666666
+    growth_rate: 0.08268149425144265
+    od_max: 5.52666666666667
+    od_min: 0.0252222222222222
+  - c0_factor: 0.25
+    cells_max: 13573266.666666651
+    cells_min: 114968.88888888898
+    condition: C0*0.25
+    exp_end: 54.766666666666666
+    exp_start: 9.166666666666666
+    growth_rate: 0.08460929967583772
+    od_max: 3.04333333333333
+    od_min: 0.0257777777777778
+  - c0_factor: 0.125
+    cells_max: 8191533.333333348
+    cells_min: 111004.4444444445
+    condition: C0*0.125
+    exp_end: 53.81666666666667
+    exp_start: 9.166666666666666
+    growth_rate: 0.08014630021287646
+    od_max: 1.83666666666667
+    od_min: 0.0248888888888889
+  - c0_factor: 0.062
+    cells_max: 4407966.666666665
+    cells_min: 120915.5555555555
+    condition: C0*0.062
+    exp_end: 54.766666666666666
+    exp_start: 9.166666666666666
+    growth_rate: 0.06400954549691829
+    od_max: 0.988333333333333
+    od_min: 0.0271111111111111
+  date: 04-11-24
+  filepath: ../all_data/data_exp_Chlamy_04-11-24.csv
+  fitted_parameters:
+    gamma: 1370754.3105472475
+    gamma_error: 326616.3400975716
+    mu_max: 0.09063063352231783
+    mu_max_error: 0.0027434804267137077
+    r_squared: 0.9024777813201301
+  growth_rates:
+    C0*0.062: 0.06400954549691829
+    C0*0.125: 0.08014630021287646
+    C0*0.25: 0.08460929967583772
+    C0*0.5: 0.08268149425144265
+    C0*1.0: 0.08965237478565964
+  light_intensity: 45
+  model_performance:
+    fitted_monod_r2: 0.9024777813201301
+    logistic_r2: -34.4845730988673
+    original_monod_r2: -102.49099687799655
+  steady_states:
+    C0*0.062: 3360857.777777777
+    C0*0.125: 6172640.0
+    C0*0.25: 12049928.88888889
+    C0*0.5: 23301022.22222222
+    C0*1.0: 62876088.88888881
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 70071555.55555551
+    cells_min: 146188.888888889
+    condition: C0*1.0
+    exp_end: 55.65
+    exp_start: 0.0
+    growth_rate: 0.09201644413734596
+    od_max: 15.7111111111111
+    od_min: 0.0327777777777778
+  - c0_factor: 0.5
+    cells_max: 34738444.44444445
+    cells_min: 162542.22222222202
+    condition: C0*0.5
+    exp_end: 55.65
+    exp_start: 0.0
+    growth_rate: 0.0848814149867195
+    od_max: 7.78888888888889
+    od_min: 0.0364444444444444
+  - c0_factor: 0.25
+    cells_max: 16997555.555555552
+    cells_min: 175922.22222222202
+    condition: C0*0.25
+    exp_end: 55.65
+    exp_start: 0.0
+    growth_rate: 0.07640817712020209
+    od_max: 3.81111111111111
+    od_min: 0.0394444444444444
+  - c0_factor: 0.125
+    cells_max: 8585500.0
+    cells_min: 180877.77777777798
+    condition: C0*0.125
+    exp_end: 55.65
+    exp_start: 0.0
+    growth_rate: 0.06504560445338156
+    od_max: 1.925
+    od_min: 0.0405555555555556
+  - c0_factor: 0.062
+    cells_max: 4947626.666666651
+    cells_min: 194257.77777777796
+    condition: C0*0.062
+    exp_end: 55.65
+    exp_start: 0.0
+    growth_rate: 0.05208238337397105
+    od_max: 1.10933333333333
+    od_min: 0.0435555555555556
+  date: 17-02-25
+  filepath: ../all_data/data_exp_Chlamy_17-02-25.csv
+  fitted_parameters:
+    gamma: 3298006.7772761863
+    gamma_error: 286129.7969227041
+    mu_max: 0.09509006406642183
+    mu_max_error: 0.0017359843760904414
+    r_squared: 0.9897325850550204
+  growth_rates:
+    C0*0.062: 0.05208238337397105
+    C0*0.125: 0.06504560445338156
+    C0*0.25: 0.07640817712020209
+    C0*0.5: 0.0848814149867195
+    C0*1.0: 0.09201644413734596
+  light_intensity: 90
+  model_performance:
+    fitted_monod_r2: 0.9897325850550204
+    logistic_r2: -8.048747667021054
+    original_monod_r2: -43.7453144674669
+  steady_states:
+    C0*0.062: 4612631.111111105
+    C0*0.125: 8313770.370370367
+    C0*0.25: 16310385.1851852
+    C0*0.5: 34153688.888888896
+    C0*1.0: 65801518.51851851
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 57930444.4494
+    cells_min: 66404.44494
+    condition: C0*1.0
+    exp_end: 56.983333333333334
+    exp_start: 0.0
+    growth_rate: 0.11107557695119902
+    od_max: 12.98888889
+    od_min: 0.014888889
+  - c0_factor: 0.5
+    cells_max: 32959400.0
+    cells_min: 86722.22024000001
+    condition: C0*0.5
+    exp_end: 56.983333333333334
+    exp_start: 0.0
+    growth_rate: 0.09997183933079881
+    od_max: 7.39
+    od_min: 0.019444444
+  - c0_factor: 0.25
+    cells_max: 17745844.44494
+    cells_min: 98615.55506
+    condition: C0*0.25
+    exp_end: 56.983333333333334
+    exp_start: 0.0
+    growth_rate: 0.08889341403489821
+    od_max: 3.978888889
+    od_min: 0.022111111
+  - c0_factor: 0.125
+    cells_max: 9559266.665180001
+    cells_min: 133304.44494
+    condition: C0*0.125
+    exp_end: 76.93333333333334
+    exp_start: 0.0
+    growth_rate: 0.06112677113107023
+    od_max: 2.143333333
+    od_min: 0.029888889
+  - c0_factor: 0.062
+    cells_max: 5117106.66518
+    cells_min: 96633.33482
+    condition: C0*0.062
+    exp_end: 76.93333333333334
+    exp_start: 0.0
+    growth_rate: 0.05345510457884569
+    od_max: 1.147333333
+    od_min: 0.021666667
+  date: 01-07-25
+  filepath: ../all_data/data_exp_Chlamy_01-07-25.csv
+  fitted_parameters:
+    gamma: 5687845.054608384
+    gamma_error: 1109648.623625554
+    mu_max: 0.12010771452743584
+    mu_max_error: 0.006251543073366424
+    r_squared: 0.962141104019926
+  growth_rates:
+    C0*0.062: 0.05345510457884569
+    C0*0.125: 0.06112677113107023
+    C0*0.25: 0.08889341403489821
+    C0*0.5: 0.09997183933079881
+    C0*1.0: 0.11107557695119902
+  light_intensity: 180
+  model_performance:
+    fitted_monod_r2: 0.962141104019926
+    logistic_r2: -2.8108569966044574
+    original_monod_r2: -14.67531558223905
+  steady_states:
+    C0*0.062: 5100257.77753
+    C0*0.125: 9422988.88988
+    C0*0.25: 17520366.66741
+    C0*0.5: 32885066.66741
+    C0*1.0: 57806555.5506
+- conditions:
+  - c0_factor: 1.0
+    cells_max: 56751022.22222202
+    cells_min: 135782.22222222202
+    condition: C0*1.0
+    exp_end: 45.733333333333334
+    exp_start: 0.0
+    growth_rate: 0.14215615903711915
+    od_max: 12.7244444444444
+    od_min: 0.0304444444444444
+  - c0_factor: 0.5
+    cells_max: 36225111.111111104
+    cells_min: 119428.88888888899
+    condition: C0*0.5
+    exp_end: 45.733333333333334
+    exp_start: 0.0
+    growth_rate: 0.13162417426730236
+    od_max: 8.12222222222222
+    od_min: 0.0267777777777778
+  - c0_factor: 0.25
+    cells_max: 19391088.8888889
+    cells_min: 102084.4444444445
+    condition: C0*0.25
+    exp_end: 45.733333333333334
+    exp_start: 0.0
+    growth_rate: 0.12160200224004229
+    od_max: 4.34777777777778
+    od_min: 0.0228888888888889
+  - c0_factor: 0.125
+    cells_max: 10500822.222222202
+    cells_min: 76315.55555555552
+    condition: C0*0.125
+    exp_end: 63.25
+    exp_start: 0.0
+    growth_rate: 0.08287339499294517
+    od_max: 2.35444444444444
+    od_min: 0.0171111111111111
+  - c0_factor: 0.062
+    cells_max: 5679066.666666652
+    cells_min: 88704.4444444445
+    condition: C0*0.062
+    exp_end: 63.25
+    exp_start: 0.0
+    growth_rate: 0.06370286566089708
+    od_max: 1.27333333333333
+    od_min: 0.0198888888888889
+  date: 07-07-25
+  filepath: ../all_data/data_exp_Chlamy_07-07-25.csv
+  fitted_parameters:
+    gamma: 5716515.170798127
+    gamma_error: 902630.7326859648
+    mu_max: 0.15764189122348668
+    mu_max_error: 0.006654143658135411
+    r_squared: 0.9766383753957246
+  growth_rates:
+    C0*0.062: 0.06370286566089708
+    C0*0.125: 0.08287339499294517
+    C0*0.25: 0.12160200224004229
+    C0*0.5: 0.13162417426730236
+    C0*1.0: 0.14215615903711915
+  light_intensity: 300
+  model_performance:
+    fitted_monod_r2: 0.9766383753957246
+    logistic_r2: -2.704990833844767
+    original_monod_r2: -3.886759354218518
+  steady_states:
+    C0*0.062: 5607706.666666651
+    C0*0.125: 10381888.8888889
+    C0*0.25: 19277111.111111127
+    C0*0.5: 36130955.55555555
+    C0*1.0: 55596377.777777754

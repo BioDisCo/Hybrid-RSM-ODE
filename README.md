@@ -2,7 +2,7 @@
 
 This repository contains all the Python scripts to reproduce results obtained in the paper 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients'. It also contains the open dataset generated for this study: 1,315 growth curves of microalga C. reinhardtii in batch cultures in two volumes (200 µL in 96 wells microplate and 50 mL in flask) with varying light intensity and cell medium (TAP) dilution conditions. All the cultures were performed in a shaking incubator at 100 rpm with temperature and CO2 rate regulated at 25°C and 1.5%, respectively.
 
-## Dataset
+## Datasets
 ### C. reinhardtii (mixotrophic and photoautotrophic cultures)
 Time series of C. reinhardtii cultures and their pre-processing are in the folder `all_data`. 
 
@@ -10,7 +10,7 @@ Time series of C. reinhardtii cultures and their pre-processing are in the folde
 Time series of Monoraphidium sp. cultures can be obtained in [Kambe et al. 2022] repository available at the following link: https://github.com/hori-group/logistic_eq_for_cultivation_planning
 The dataset is contained in the folder `_OD_excel_data` in the file `OD_data.xlsx`. By running the script `format_Kambe_2022_data.py` from this repository it will create a folder `data_Kambe` containing 4 csv files with OD time series of Monoraphidium at four light intensities (0.274, 0.521, 1.09, 2.92 $\mu mol_{h\nu} \cdot s^{-1}$) containing each 4 dilutions of the BG-11 medium conditions $C_{0} = 1, 0.5, 0.25, 0.125, 0.0625$ in the column 'mean 0', 'mean 1', 'mean 2', 'mean 3' and 'mean 4', respectively.
 
-All details concerning the collecting of C.reinhardtii data and their pre-processing are available in 'Method' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper. 
+All details concerning the collecting of C.reinhardtii data and their pre-processing are available in the 'Methods' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper. 
 
 ## Models
 The models used to benchmark RSM-ODE model are : 
@@ -18,9 +18,9 @@ The models used to benchmark RSM-ODE model are :
 - DMB developed in [Martínez et al. 2020]
 - MMmB developed in this study
 
-All details concerning these model are available in 'Method' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper. 
+All details concerning these model are available in the 'Methods' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper. 
 
-## Script
+## Scripts
 This is a description of the purpose of each scripts: 
 
 - `comparison_TAP_BG11.py` allows the comparison of experimental growth data of C. reinhardtii in mixotrophic conditions (TAP medium) and photoautotrophic conditions (BG-11 medium) for two light intensity. 
@@ -55,10 +55,7 @@ Warning: The following scripts needs to be run after running `Chlamydomonas_data
 - `DMB_sliders_erlen.py` and `DMB_sliders_plate.py`
 - `LMMB_sliders_erlen.py` and `LMMB_sliders_plate.py`
 - `MMmB_sliders_erlen.py` and `MMmB_sliders_plate.py`
-
-This structural problem will be fixed later by authors. 
-
-To run `scaling_surfaces.py`, `Chlamydomonas_data_RSM_ODE_erlen.py` and `Chlamydomonas_data_RSM_ODE_plate.py` should have been run before. 
+- `scaling_surfaces.py`
 
 ## References
 [Kambe et al. 2022] Kazuki Kambe, Yasutaka Hirokawa, Asuka Koshi, and Yutaka Hori. A parametric logistic equation with light

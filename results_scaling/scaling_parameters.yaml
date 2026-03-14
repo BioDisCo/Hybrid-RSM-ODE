@@ -1,9 +1,0 @@
-mumax_scaling:
-  description: "mu_max_erlen \u2248 z \xD7 mu_max_plate(C0, s_L \xD7 L0)"
-  r2: 0.9942881626975897
-  s_L: 0.35447457607434535
-  z: 1.6626438490862387
-nmax_scaling:
-  alpha: 0.8108490511320503
-  description: "N_max_erlen \u2248 alpha \xD7 N_max_plate"
-  r2: 0.9400188374810974

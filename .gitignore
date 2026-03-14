@@ -188,11 +188,12 @@ cython_debug/
 .cursorindexingignore
 
 # dont check in generated model files
-comaprison_BG-11_TAP_chlamy/
+comparison_BG-11_TAP_chlamy/
 data_Kambe/
 results_Monoraphidium_data/
 results_erlen/
 results_plates/
+results_scaling/
 surfaces_comparison/
 OD_data.xlsx
 

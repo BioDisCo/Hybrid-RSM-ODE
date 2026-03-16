@@ -8,17 +8,20 @@ import matplotlib as mpl
 # -------------------------
 # Global font configuration
 # -------------------------
-mpl.rcParams['font.family'] = 'sans-serif'
-mpl.rcParams['font.sans-serif'] = ['Helvetica']
+mpl.rcParams["font.family"] = "sans-serif"
+mpl.rcParams["font.sans-serif"] = ["Helvetica"]
 
-mpl.rcParams['axes.titlesize'] = 18
-mpl.rcParams['axes.labelsize'] = 16
-mpl.rcParams['xtick.labelsize'] = 14
-mpl.rcParams['ytick.labelsize'] = 14
-mpl.rcParams['legend.fontsize'] = 12
-mpl.rcParams['figure.titlesize'] = 20
+mpl.rcParams["axes.titlesize"] = 18
+mpl.rcParams["axes.labelsize"] = 16
+mpl.rcParams["xtick.labelsize"] = 14
+mpl.rcParams["ytick.labelsize"] = 14
+mpl.rcParams["legend.fontsize"] = 12
+mpl.rcParams["figure.titlesize"] = 20
 
-def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, means_stds_file2, raw_data_file2, num_points=8):
+
+def plot_comparison_two_dates_custom_markers(
+    means_stds_file1, raw_data_file1, means_stds_file2, raw_data_file2, num_points=8
+):
     """
     Two columns of graphs for two different dates.
     C0 = 1 (top) → C0 = 0.0625 (bottom)
@@ -27,57 +30,48 @@ def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, m
     Line styles for regression: ':' for A, '-' for B, '-.' for C.
     """
 
-    datasets = [
-        (means_stds_file1, raw_data_file1),
-        (means_stds_file2, raw_data_file2)
-    ]
+    datasets = [(means_stds_file1, raw_data_file1), (means_stds_file2, raw_data_file2)]
 
     # Color definition by C0
     colors_by_group = {
-        0: 'mediumseagreen',  # C0 = 1
-        1: 'grey',            # C0 = 1/2
-        2: 'tomato',           # C0 = 1/4
-        3: 'teal',             # C0 = 1/8
-        4: 'orange'            # C0 = 1/16
+        0: "mediumseagreen",  # C0 = 1
+        1: "grey",  # C0 = 1/2
+        2: "tomato",  # C0 = 1/4
+        3: "teal",  # C0 = 1/8
+        4: "orange",  # C0 = 1/16
     }
 
     # Marker definition by replicate
-    markers_by_rep = {
-        'A': 'o',
-        'B': '^',
-        'C': 's'
-    }
+    markers_by_rep = {"A": "o", "B": "^", "C": "s"}
 
     # Line style definition for regression
-    lines_by_rep = {
-        'A': ':',
-        'B': '-',
-        'C': '-.'
-    }
+    lines_by_rep = {"A": ":", "B": "-", "C": "-."}
 
     n_graphs = 5
-    fig, axes = plt.subplots(
-        nrows=n_graphs, ncols=2, figsize=(16, n_graphs * 4)
-    )
+    fig, axes = plt.subplots(nrows=n_graphs, ncols=2, figsize=(16, n_graphs * 4))
     axes = np.array(axes).reshape(n_graphs, 2)
 
     for col_index, (means_file, raw_file) in enumerate(datasets):
-        df_means = pd.read_csv(means_file, sep=';')
-        df_raw = pd.read_csv(raw_file, sep=';')
+        df_means = pd.read_csv(means_file, sep=";")
+        df_raw = pd.read_csv(raw_file, sep=";")
         df_raw = df_raw.iloc[1:].reset_index(drop=True)
-        df_raw['Time (s)'] = pd.to_numeric(df_raw['Time (s)'], errors='coerce')
+        df_raw["Time (s)"] = pd.to_numeric(df_raw["Time (s)"], errors="coerce")
 
         for group_index in range(n_graphs):
             ax = axes[group_index, col_index]
 
-            for rep in ['A', 'B', 'C']:
+            for rep in ["A", "B", "C"]:
                 label = f"{group_index}{rep}"
 
                 try:
                     x_vals = df_means[f"{label}_avg"].values
                     x_err = df_means[f"{label}_std"].values
-                    y_vals = pd.to_numeric(df_raw[f"OD {label}"], errors='coerce').values
-                    y_err = pd.to_numeric(df_raw[f"Std {label}"], errors='coerce').values
+                    y_vals = pd.to_numeric(
+                        df_raw[f"OD {label}"], errors="coerce"
+                    ).values
+                    y_err = pd.to_numeric(
+                        df_raw[f"Std {label}"], errors="coerce"
+                    ).values
                 except KeyError:
                     continue
 
@@ -87,7 +81,12 @@ def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, m
                 x_err = x_err[:min_len]
                 y_err = y_err[:min_len]
 
-                mask = ~np.isnan(x_vals) & ~np.isnan(y_vals) & ~np.isnan(x_err) & ~np.isnan(y_err)
+                mask = (
+                    ~np.isnan(x_vals)
+                    & ~np.isnan(y_vals)
+                    & ~np.isnan(x_err)
+                    & ~np.isnan(y_err)
+                )
                 x_all = x_vals[mask]
                 y_all = y_vals[mask]
                 xerr_all = x_err[mask]
@@ -103,9 +102,15 @@ def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, m
 
                 # Scatter plot
                 ax.errorbar(
-                    x_all, y_all,
-                    xerr=xerr_all, yerr=yerr_all,
-                    fmt=marker, color=color, capsize=3, alpha=0.7, linestyle='None'
+                    x_all,
+                    y_all,
+                    xerr=xerr_all,
+                    yerr=yerr_all,
+                    fmt=marker,
+                    color=color,
+                    capsize=3,
+                    alpha=0.7,
+                    linestyle="None",
                 )
 
                 # Regression on the first points
@@ -126,14 +131,21 @@ def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, m
                     ax.plot(x_fit, y_fit, linestyle=line_style, color=color)
 
                     label_eq = f"{label}: y = {a:.2f}x + {b:.2f} (R²={r2:.2f})"
-                    ax.plot([], [], color=color, linestyle=line_style, marker=marker, label=label_eq)
+                    ax.plot(
+                        [],
+                        [],
+                        color=color,
+                        linestyle=line_style,
+                        marker=marker,
+                        label=label_eq,
+                    )
 
             # C0 title
-            ax.set_title(f"$C_0 =$ {1 / (2 ** group_index):.3g}", fontsize=18)
+            ax.set_title(f"$C_0 =$ {1 / (2**group_index):.3g}", fontsize=18)
 
             # X-axis only on the last row
             if group_index != n_graphs - 1:
-                ax.set_xlabel('')
+                ax.set_xlabel("")
                 ax.set_xticklabels([])
             else:
                 ax.set_xlabel("OD (750 nm) - plate reader", fontsize=16)
@@ -142,11 +154,11 @@ def plot_comparison_two_dates_custom_markers(means_stds_file1, raw_data_file1, m
             if col_index == 0:
                 ax.set_ylabel("OD (750 nm) - cuvette reader", fontsize=16)
             else:
-                ax.set_ylabel('')
+                ax.set_ylabel("")
 
-            ax.tick_params(axis='both', which='major', labelsize=14)
+            ax.tick_params(axis="both", which="major", labelsize=14)
             ax.grid(False)
-            ax.legend(loc='lower right', frameon=False)
+            ax.legend(loc="lower right", frameon=False)
 
     plt.tight_layout()
     plt.savefig("cuvette_plate_link.png", dpi=360)
@@ -159,5 +171,5 @@ plot_comparison_two_dates_custom_markers(
     "data_exp_Chlamy_01-07-25.csv",
     "replicates_means_stds_07_07_2025.csv",
     "data_exp_Chlamy_07-07-25.csv",
-    num_points=9
+    num_points=9,
 )

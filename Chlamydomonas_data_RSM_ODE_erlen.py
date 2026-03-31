@@ -717,7 +717,7 @@ def filter_conditions(df_params, selected_conditions):
     return df_filtered
 
 
-def extract_parameters_with_replicates(files_dict, conv_OD_to_cell=4.77e6, selected_conditions=None): # conv_OD_to_cell=4.46e6
+def extract_parameters_with_replicates(files_dict, conv_OD_to_cell=4.77e6, selected_conditions=None):
     """
     Extracts growth parameters for each file and each condition,
     computing parameters for each replicate A, B, C separately.

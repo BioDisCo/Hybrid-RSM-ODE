@@ -24,11 +24,13 @@ L0_REF = 170.0  # µmol·m⁻²·s⁻¹
 
 class SteadyStateModel(Enum):
     """Available steady state models."""
+
     HALDANE = "haldane"
 
 
 class GrowthRateModel(Enum):
     """Available growth rate models."""
+
     MONOD_SIMPLE = "monod_simple"
     HALDANE_LIGHT_ONLY = "haldane_light"
     HALDANE_LIGHT_AND_NUTRIENT = "haldane_both"
@@ -38,6 +40,7 @@ class GrowthRateModel(Enum):
 # =============================================================================
 # STEADY STATE MODELS
 # =============================================================================
+
 
 def steady_state_haldane(xy, n_max_ref, k_c, k_l, k_i):
     """Haldane photoinhibition model for plate steady state.
@@ -79,6 +82,7 @@ def steady_state_haldane(xy, n_max_ref, k_c, k_l, k_i):
 # =============================================================================
 # GROWTH RATE MODELS
 # =============================================================================
+
 
 def growth_rate_monod_simple(xy, mu_max_ref, k_c, k_l):
     """Simple double Monod model (no inhibition terms).
@@ -205,12 +209,18 @@ def growth_rate_haldane_synergistic(xy, mu_max_ref, k_c, k_l, k_i, alpha):
         μ: Predicted specific growth rate (h⁻¹)
     """
     c, l = xy
-    return mu_max_ref * (c / (k_c + c)) * (l / (k_l + l + l**2 / k_i)) / (1 + alpha * l * c)
+    return (
+        mu_max_ref
+        * (c / (k_c + c))
+        * (l / (k_l + l + l**2 / k_i))
+        / (1 + alpha * l * c)
+    )
 
 
 # =============================================================================
 # HELPER FUNCTIONS
 # =============================================================================
+
 
 def infer_growth_rate_model(params: tuple) -> GrowthRateModel:
     """Infer growth rate model type from fitted parameter tuple.
@@ -292,11 +302,13 @@ def get_growth_rate_function(model: GrowthRateModel):
         raise ValueError(f"Unknown growth rate model: {model}")
 
 
-def evaluate_growth_rate(c: Union[float, np.ndarray],
-                         l: Union[float, np.ndarray],
-                         params: tuple,
-                         model: GrowthRateModel,
-                         use_l0_factors: bool = False) -> Union[float, np.ndarray]:
+def evaluate_growth_rate(
+    c: Union[float, np.ndarray],
+    l: Union[float, np.ndarray],
+    params: tuple,
+    model: GrowthRateModel,
+    use_l0_factors: bool = False,
+) -> Union[float, np.ndarray]:
     """Evaluate growth rate for given (C,L) and fitted parameters.
 
     This is a convenience wrapper that handles model selection and parameter
@@ -334,15 +346,17 @@ def evaluate_growth_rate(c: Union[float, np.ndarray],
         l_input = l / L0_REF
     else:
         l_input = l
-    
+
     func = get_growth_rate_function(model)
     return func((c, l_input), *params)
 
 
-def evaluate_steady_state(c: Union[float, np.ndarray],
-                          l: Union[float, np.ndarray],
-                          params: tuple,
-                          use_l0_factors: bool = False) -> Union[float, np.ndarray]:
+def evaluate_steady_state(
+    c: Union[float, np.ndarray],
+    l: Union[float, np.ndarray],
+    params: tuple,
+    use_l0_factors: bool = False,
+) -> Union[float, np.ndarray]:
     """Evaluate steady state for given (C,L) and fitted parameters.
 
     Parameters

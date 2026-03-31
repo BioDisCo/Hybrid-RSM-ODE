@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 MAX_TIME_HOURS = 500
 
+
 # -------------------- Loading t_lag --------------------
 def load_tlag_adjustments(filepath="results_plates/t_lag_adjustments.txt"):
     """
@@ -39,16 +40,16 @@ def load_tlag_adjustments(filepath="results_plates/t_lag_adjustments.txt"):
     """
     tlag_dict = {}
     try:
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             for line in f:
                 line = line.strip()
                 # Skip comments and empty lines
-                if not line or line.startswith('#'):
+                if not line or line.startswith("#"):
                     continue
 
                 try:
                     # Parse line: (L0, C0): t_lag
-                    parts = line.split(':')
+                    parts = line.split(":")
                     if len(parts) != 2:
                         continue
 
@@ -57,8 +58,8 @@ def load_tlag_adjustments(filepath="results_plates/t_lag_adjustments.txt"):
                     t_lag = float(parts[1].strip())
 
                     # Convert string tuple to float tuple
-                    key_str = key_str.strip('()')
-                    l0_str, c0_str = key_str.split(',')
+                    key_str = key_str.strip("()")
+                    l0_str, c0_str = key_str.split(",")
                     l0 = float(l0_str.strip())
                     c0 = float(c0_str.strip())
 
@@ -72,11 +73,15 @@ def load_tlag_adjustments(filepath="results_plates/t_lag_adjustments.txt"):
         return tlag_dict
 
     except FileNotFoundError:
-        logger.warning(f"t_lag file not found: {filepath}. Proceeding without t_lag adjustments.")
+        logger.warning(
+            f"t_lag file not found: {filepath}. Proceeding without t_lag adjustments."
+        )
         return {}
+
 
 # Load t_lag values at startup
 TLAG_ADJUSTMENTS = load_tlag_adjustments()
+
 
 # ==================== Kambe model ====================
 def lightpercell(L, N, dep, vol, K):
@@ -96,7 +101,7 @@ def lightpercell(L, N, dep, vol, K):
     if N <= 0:
         return 0
     cell_conc = N / vol
-    LPC = L * (1 - 10**(-K * cell_conc * dep)) / N
+    LPC = L * (1 - 10 ** (-K * cell_conc * dep)) / N
     return LPC
 
 
@@ -123,15 +128,15 @@ def kambe_full_model(t, y, params):
     N, C = y
 
     # Parameters
-    mu = params['mu']
-    lambda_L = params['lambda_L']
-    Gamma = params['Gamma']
-    xi_c = params['xi_c']
-    alpha = params['alpha']
-    Ein_val = params['Ein_val']
-    dep = params['dep']
-    vol = params['vol']
-    K = params['K']
+    mu = params["mu"]
+    lambda_L = params["lambda_L"]
+    Gamma = params["Gamma"]
+    xi_c = params["xi_c"]
+    alpha = params["alpha"]
+    Ein_val = params["Ein_val"]
+    dep = params["dep"]
+    vol = params["vol"]
+    K = params["K"]
 
     # Prevent negative values
     N = max(N, 1e-10)
@@ -141,7 +146,7 @@ def kambe_full_model(t, y, params):
     L = lightpercell(Ein_val, N, dep, vol, K)
 
     # Differential equations
-    dNdt = mu * (C / (xi_c + C)) * (L / (lambda_L + L)) * (1 - N/Gamma) * N
+    dNdt = mu * (C / (xi_c + C)) * (L / (lambda_L + L)) * (1 - N / Gamma) * N
     dCdt = -alpha * dNdt
 
     return [dNdt, dCdt]
@@ -149,8 +154,7 @@ def kambe_full_model(t, y, params):
 
 # ==================== Data loading ====================
 def load_intermediate_data_with_timeseries(
-    conv_OD_plate_to_OD_erlen: float = 6.01,
-    conv_OD_to_cell: float = 4.77e6
+    conv_OD_plate_to_OD_erlen: float = 6.01, conv_OD_to_cell: float = 4.77e6
 ) -> dict[tuple[float, float], dict]:
     """Load intermediate data with validation time series."""
     date_to_l0 = {
@@ -159,7 +163,11 @@ def load_intermediate_data_with_timeseries(
         "07_07_2025": 1.0,
         "17_02_2025": 0.3,
     }
-    intermediate_files = sorted(glob.glob("all_data/final_corrected_data/replicate_OD_intermediate_dilution_*.csv"))
+    intermediate_files = sorted(
+        glob.glob(
+            "all_data/final_corrected_data/replicate_OD_intermediate_dilution_*.csv"
+        )
+    )
     intermediate_data = {}
     for fp in intermediate_files:
         filename = pathlib.Path(fp).name
@@ -190,18 +198,17 @@ def load_intermediate_data_with_timeseries(
                 replicates = []
                 all_values = []
                 for col in rep_cols:
-                    values = df[col].values * conv_OD_plate_to_OD_erlen * conv_OD_to_cell
-                    replicates.append({
-                        "Time": time.tolist(),
-                        "Value": values.tolist()
-                    })
+                    values = (
+                        df[col].values * conv_OD_plate_to_OD_erlen * conv_OD_to_cell
+                    )
+                    replicates.append({"Time": time.tolist(), "Value": values.tolist()})
                     all_values.append(values)
                 mean_values = np.nanmean(all_values, axis=0)
                 key = (c0, l0_value)
                 intermediate_data[key] = {
-                    'time': time,
-                    'mean': mean_values,
-                    'replicates': replicates
+                    "time": time,
+                    "mean": mean_values,
+                    "replicates": replicates,
                 }
         except Exception as e:
             logger.warning(f"Failed to load intermediate data from {fp}: {e}")
@@ -224,7 +231,7 @@ def plot_with_sliders_test():
             new_exp = data_import.read_csv_data_plate_hand_cleaned(
                 fp,
                 conv_OD_plate_to_OD_erlen=conv_OD_plate_to_OD_erlen,
-                conv_OD_to_cell=conv_OD_to_cell
+                conv_OD_to_cell=conv_OD_to_cell,
             )
             experiments_plate.update(new_exp)
             logger.info(f"Loaded {fp}")
@@ -244,10 +251,12 @@ def plot_with_sliders_test():
     for (c0, l0), data_dict in intermediate_data_ts.items():
         key = (c0, l0)
         if key not in all_conditions:
-            all_conditions[key] = {"type": "intermediate",
-                                   "time": data_dict['time'],
-                                   "mean": data_dict['mean'],
-                                   "replicates": data_dict['replicates']}
+            all_conditions[key] = {
+                "type": "intermediate",
+                "time": data_dict["time"],
+                "mean": data_dict["mean"],
+                "replicates": data_dict["replicates"],
+            }
 
     # Filter for the 7 specific test conditions
     test_pairs = [
@@ -257,7 +266,7 @@ def plot_with_sliders_test():
         (1.0, 0.6),
         (0.25, 0.6),
         (0.25, 0.3),
-        (1.0, 0.15)
+        (1.0, 0.15),
     ]
 
     test_conditions = {k: v for k, v in all_conditions.items() if k in test_pairs}
@@ -271,15 +280,15 @@ def plot_with_sliders_test():
 
     # Initial Kambe model parameters
     init_params = {
-        'mu': 0.153,
-        'lambda_L': 0.012e-5,
-        'Gamma': 0.64e8,
-        'xi_c': 0.011,
-        'alpha': 0.016e-6,
-        'L0_ref': 170,
-        'dep': 0.5,      # culture depth [cm] - plate
-        'vol': 0.2,      # culture volume [ml] - plate
-        'K': 1e-8        # extinction coefficient [ml cm^-1 cell^-1]
+        "mu": 0.153,
+        "lambda_L": 0.012e-5,
+        "Gamma": 0.64e8,
+        "xi_c": 0.011,
+        "alpha": 0.016e-6,
+        "L0_ref": 170,
+        "dep": 0.5,  # culture depth [cm] - plate
+        "vol": 0.2,  # culture volume [ml] - plate
+        "K": 1e-8,  # extinction coefficient [ml cm^-1 cell^-1]
     }
 
     # Simulation configuration
@@ -290,8 +299,18 @@ def plot_with_sliders_test():
     # Create grid layout for 7 subplots (2 rows x 4 columns)
     fig = plt.figure(figsize=(16, 8))
     from matplotlib.gridspec import GridSpec
-    gs = GridSpec(2, 4, figure=fig, left=0.05, right=0.95,
-                  top=0.88, bottom=0.30, hspace=0.3, wspace=0.3)
+
+    gs = GridSpec(
+        2,
+        4,
+        figure=fig,
+        left=0.05,
+        right=0.95,
+        top=0.88,
+        bottom=0.30,
+        hspace=0.3,
+        wspace=0.3,
+    )
 
     plot_elements = []
 
@@ -315,50 +334,75 @@ def plot_with_sliders_test():
 
         # Plot replicates
         for replicate in replicates:
-            ax.scatter(replicate["Time"], replicate["Value"],
-                      color='grey', s=8, alpha=0.15)
+            ax.scatter(
+                replicate["Time"], replicate["Value"], color="grey", s=8, alpha=0.15
+            )
 
         # Plot mean
-        ax.scatter(time, concentration, color='orange', s=15, alpha=0.7,
-                  label='Exp data')
+        ax.scatter(
+            time, concentration, color="orange", s=15, alpha=0.7, label="Exp data"
+        )
 
         # Model line
-        line, = ax.plot([], [], 'black', linewidth=1.2, label='Model')
+        (line,) = ax.plot([], [], "black", linewidth=1.2, label="Model")
 
-        r2_text = ax.text(0.98, 0.98, '', transform=ax.transAxes,
-                          fontsize=7, verticalalignment='top',
-                          horizontalalignment='right',
-                          bbox=dict(boxstyle='round,pad=0.3',
-                                   facecolor='white', alpha=0.85,
-                                   edgecolor='gray', linewidth=0.5))
+        r2_text = ax.text(
+            0.98,
+            0.98,
+            "",
+            transform=ax.transAxes,
+            fontsize=7,
+            verticalalignment="top",
+            horizontalalignment="right",
+            bbox=dict(
+                boxstyle="round,pad=0.3",
+                facecolor="white",
+                alpha=0.85,
+                edgecolor="gray",
+                linewidth=0.5,
+            ),
+        )
 
-        plot_elements.append({
-            'ax': ax,
-            'line': line,
-            'r2_text': r2_text,
-            'c0': c0,
-            'l0': l0,
-            'time_exp': time,
-            'conc_exp': concentration
-        })
+        plot_elements.append(
+            {
+                "ax": ax,
+                "line": line,
+                "r2_text": r2_text,
+                "c0": c0,
+                "l0": l0,
+                "time_exp": time,
+                "conc_exp": concentration,
+            }
+        )
 
-        ax.set_title(f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=8, pad=3)
+        ax.set_title(
+            f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=8, pad=3
+        )
         ax.grid(True, alpha=0.15, linewidth=0.3)
         ax.set_xlim(0, MAX_TIME_HOURS)
-        ax.tick_params(axis='both', labelsize=6)
+        ax.tick_params(axis="both", labelsize=6)
         if idx == 0:
-            ax.legend(fontsize=7, loc='lower right', framealpha=0.8)
+            ax.legend(fontsize=7, loc="lower right", framealpha=0.8)
 
     # Disable unused axis (position 7 in a 2x4 grid)
     ax_empty = fig.add_subplot(gs[1, 3])
-    ax_empty.axis('off')
+    ax_empty.axis("off")
 
-    fig.text(0.5, 0.25, "Time (h)", ha="center", fontsize=10, weight='bold')
-    fig.text(0.02, 0.6, "Cell density (cell mL$^{-1}$)", va="center",
-            rotation="vertical", fontsize=10, weight='bold')
+    fig.text(0.5, 0.25, "Time (h)", ha="center", fontsize=10, weight="bold")
+    fig.text(
+        0.02,
+        0.6,
+        "Cell density (cell mL$^{-1}$)",
+        va="center",
+        rotation="vertical",
+        fontsize=10,
+        weight="bold",
+    )
     title_text = fig.suptitle(
-        'test (7 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/7',
-        fontsize=11, fontweight='bold')
+        "test (7 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/7",
+        fontsize=11,
+        fontweight="bold",
+    )
 
     # ==================== Sliders ====================
     axcolor = "lightgoldenrodyellow"
@@ -368,28 +412,54 @@ def plot_with_sliders_test():
     spacing = 0.023
 
     slider_defs = [
-        ("mu",       0.01,  1.0,   init_params['mu'],
-         r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
-        ("lambda_L", 1e-8,  1e-5,  init_params['lambda_L'],
-         r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$"),
-        ("Gamma",    1e6,   1e8,   init_params['Gamma'],
-         r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$"),
-        ("xi_c",     0.001, 0.5,   init_params['xi_c'],
-         r"$\xi_C\ (\mathrm{dimensionless})$"),
-        ("alpha",    1e-9,  1e-6,  init_params['alpha'],
-         r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$"),
-        ("L0_ref",   10,    500,   init_params['L0_ref'],
-         r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$"),
-        ("C0_ref",   0.1,   10.0,  1.0,
-         r"$C_0\ (\mathrm{dimensionless})$"),
+        ("mu", 0.01, 1.0, init_params["mu"], r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
+        (
+            "lambda_L",
+            1e-8,
+            1e-5,
+            init_params["lambda_L"],
+            r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "Gamma",
+            1e6,
+            1e8,
+            init_params["Gamma"],
+            r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$",
+        ),
+        ("xi_c", 0.001, 0.5, init_params["xi_c"], r"$\xi_C\ (\mathrm{dimensionless})$"),
+        (
+            "alpha",
+            1e-9,
+            1e-6,
+            init_params["alpha"],
+            r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "L0_ref",
+            10,
+            500,
+            init_params["L0_ref"],
+            r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$",
+        ),
+        ("C0_ref", 0.1, 10.0, 1.0, r"$C_0\ (\mathrm{dimensionless})$"),
     ]
 
     sliders = {}
     for idx, (name, vmin, vmax, val, label) in enumerate(slider_defs):
-        ax_slider = plt.axes([slider_left, 0.23 - idx*spacing, slider_width, slider_height],
-                             facecolor=axcolor)
-        sliders[name] = Slider(ax_slider, label, vmin, vmax,
-                              valinit=val, valstep=(vmax-vmin)/1000, color='black')
+        ax_slider = plt.axes(
+            [slider_left, 0.23 - idx * spacing, slider_width, slider_height],
+            facecolor=axcolor,
+        )
+        sliders[name] = Slider(
+            ax_slider,
+            label,
+            vmin,
+            vmax,
+            valinit=val,
+            valstep=(vmax - vmin) / 1000,
+            color="black",
+        )
 
     # ==================== Update function ====================
     def update(val):
@@ -399,54 +469,62 @@ def plot_with_sliders_test():
         n_total_graphs = len(plot_elements)
 
         # Read slider values
-        mu = sliders['mu'].val
-        lambda_L = sliders['lambda_L'].val
-        Gamma = sliders['Gamma'].val
-        xi_c = sliders['xi_c'].val
-        alpha = sliders['alpha'].val
-        L0_ref = sliders['L0_ref'].val
-        C0_ref = sliders['C0_ref'].val
+        mu = sliders["mu"].val
+        lambda_L = sliders["lambda_L"].val
+        Gamma = sliders["Gamma"].val
+        xi_c = sliders["xi_c"].val
+        alpha = sliders["alpha"].val
+        L0_ref = sliders["L0_ref"].val
+        C0_ref = sliders["C0_ref"].val
 
         for elem in plot_elements:
             # Compute Ein_val for this condition
-            L0_cond = L0_ref * elem['l0']
+            L0_cond = L0_ref * elem["l0"]
             Ein_val = L0_cond * light_area * 3600  # Convert µmol/m²/s to µmol/h
 
             # Initial nutrient concentration
-            C0_cond = C0_ref * elem['c0']
+            C0_cond = C0_ref * elem["c0"]
 
             # ODE parameters
             params = {
-                'mu': mu,
-                'lambda_L': lambda_L,
-                'Gamma': Gamma,
-                'xi_c': xi_c,
-                'alpha': alpha,
-                'Ein_val': Ein_val,
-                'dep': init_params['dep'],
-                'vol': init_params['vol'],
-                'K': init_params['K']
+                "mu": mu,
+                "lambda_L": lambda_L,
+                "Gamma": Gamma,
+                "xi_c": xi_c,
+                "alpha": alpha,
+                "Ein_val": Ein_val,
+                "dep": init_params["dep"],
+                "vol": init_params["vol"],
+                "K": init_params["K"],
             }
 
             try:
                 # Initial conditions: [N0, C0]
-                N0 = elem['conc_exp'][0] if elem['conc_exp'][0] > 0 else 1e5
+                N0 = elem["conc_exp"][0] if elem["conc_exp"][0] > 0 else 1e5
                 y0 = [N0, C0_cond]
 
-                sol = solve_ivp(kambe_full_model, t_span, y0, args=(params,),
-                              t_eval=t_eval, method='LSODA', rtol=1e-8, atol=1e-10)
+                sol = solve_ivp(
+                    kambe_full_model,
+                    t_span,
+                    y0,
+                    args=(params,),
+                    t_eval=t_eval,
+                    method="LSODA",
+                    rtol=1e-8,
+                    atol=1e-10,
+                )
 
                 if sol.success:
                     N_model = sol.y[0]
 
                     # Apply t_lag time shift
-                    t_lag = TLAG_ADJUSTMENTS.get((elem['l0'], elem['c0']), 0.0)
+                    t_lag = TLAG_ADJUSTMENTS.get((elem["l0"], elem["c0"]), 0.0)
                     t_shifted = sol.t + t_lag
-                    elem['line'].set_data(t_shifted, N_model)
+                    elem["line"].set_data(t_shifted, N_model)
 
                     # Interpolate at experimental time points
-                    time_exp = elem['time_exp']
-                    conc_exp = elem['conc_exp']
+                    time_exp = elem["time_exp"]
+                    conc_exp = elem["conc_exp"]
                     N_interp = np.interp(time_exp, t_shifted, N_model)
 
                     valid_mask = ~np.isnan(conc_exp)
@@ -463,12 +541,12 @@ def plot_with_sliders_test():
                         if not np.isnan(r2_local) and r2_local >= 0.85:
                             n_good_r2 += 1
 
-                        elem['r2_text'].set_text(
-                            f'R²={r2_local:.2f}' if not np.isnan(r2_local) else 'R²=N/A'
+                        elem["r2_text"].set_text(
+                            f"R²={r2_local:.2f}" if not np.isnan(r2_local) else "R²=N/A"
                         )
                         # Background colour
-                        elem['r2_text'].get_bbox_patch().set_facecolor(
-                            '#c8f7c5' if r2_local >= 0.85 else '#f7c5c5'
+                        elem["r2_text"].get_bbox_patch().set_facecolor(
+                            "#c8f7c5" if r2_local >= 0.85 else "#f7c5c5"
                         )
 
                         all_y_exp.extend(y_exp_local)
@@ -476,11 +554,11 @@ def plot_with_sliders_test():
 
                     # Dynamically adjust ylim
                     max_val = max(np.nanmax(N_model), np.nanmax(conc_exp))
-                    elem['ax'].set_ylim([0, max_val * 1.2])
+                    elem["ax"].set_ylim([0, max_val * 1.2])
 
             except Exception as e:
                 logger.error(f"Error for C0={elem['c0']}, L0={elem['l0']}: {e}")
-                elem['r2_text'].set_text('R²=Err')
+                elem["r2_text"].set_text("R²=Err")
 
         # Global R²
         if len(all_y_exp) > 0:
@@ -491,10 +569,10 @@ def plot_with_sliders_test():
             ss_tot = np.sum((all_y_exp - y_mean) ** 2)
             global_r2 = 1 - ss_res / ss_tot if ss_tot > 0 else np.nan
 
-            r2_val = f'{global_r2:.6f}' if not np.isnan(global_r2) else 'N/A'
+            r2_val = f"{global_r2:.6f}" if not np.isnan(global_r2) else "N/A"
             title_text.set_text(
-                f'test (7 conditions)  |  Global R² = {r2_val}  |  '
-                f'Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}'
+                f"test (7 conditions)  |  Global R² = {r2_val}  |  "
+                f"Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}"
             )
 
         fig.canvas.draw_idle()
@@ -522,7 +600,7 @@ def plot_with_sliders_calibration():
             new_exp = data_import.read_csv_data_plate_hand_cleaned(
                 fp,
                 conv_OD_plate_to_OD_erlen=conv_OD_plate_to_OD_erlen,
-                conv_OD_to_cell=conv_OD_to_cell
+                conv_OD_to_cell=conv_OD_to_cell,
             )
             experiments_plate.update(new_exp)
         except Exception as e:
@@ -541,14 +619,19 @@ def plot_with_sliders_calibration():
     for (c0, l0), data_dict in intermediate_data_ts.items():
         key = (c0, l0)
         if key not in all_conditions:
-            all_conditions[key] = {"type": "intermediate",
-                                   "time": data_dict['time'],
-                                   "mean": data_dict['mean'],
-                                   "replicates": data_dict['replicates']}
+            all_conditions[key] = {
+                "type": "intermediate",
+                "time": data_dict["time"],
+                "mean": data_dict["mean"],
+                "replicates": data_dict["replicates"],
+            }
 
     # Filter for C0 = 1, 0.5, 0.25, 0.125, 0.0625
-    calibration_conditions = {k: v for k, v in all_conditions.items()
-                          if k[0] in [1.0, 0.5, 0.25, 0.125, 0.0625]}
+    calibration_conditions = {
+        k: v
+        for k, v in all_conditions.items()
+        if k[0] in [1.0, 0.5, 0.25, 0.125, 0.0625]
+    }
 
     # Organise as grid: C0 in columns (ascending), L0 in rows (descending via reversed)
     c0_values = sorted(set(k[0] for k in calibration_conditions.keys()))
@@ -559,15 +642,15 @@ def plot_with_sliders_calibration():
 
     # Initial Kambe model parameters
     init_params = {
-        'mu': 0.153,
-        'lambda_L': 0.012e-5,
-        'Gamma': 0.64e8,
-        'xi_c': 0.008,
-        'alpha': 0.016e-6,
-        'L0_ref': 170,
-        'dep': 0.5,      # culture depth [cm] - plate
-        'vol': 0.2,      # culture volume [ml] - plate
-        'K': 1e-8        # extinction coefficient [ml cm^-1 cell^-1]
+        "mu": 0.153,
+        "lambda_L": 0.012e-5,
+        "Gamma": 0.64e8,
+        "xi_c": 0.008,
+        "alpha": 0.016e-6,
+        "L0_ref": 170,
+        "dep": 0.5,  # culture depth [cm] - plate
+        "vol": 0.2,  # culture volume [ml] - plate
+        "K": 1e-8,  # extinction coefficient [ml cm^-1 cell^-1]
     }
 
     # Simulation configuration
@@ -575,10 +658,20 @@ def plot_with_sliders_calibration():
     t_span = (0, MAX_TIME_HOURS)
     t_eval = np.linspace(0, MAX_TIME_HOURS, 1000)
 
-    fig = plt.figure(figsize=(1.2*n_c0, 2*n_l0 + 3))
+    fig = plt.figure(figsize=(1.2 * n_c0, 2 * n_l0 + 3))
     from matplotlib.gridspec import GridSpec
-    gs = GridSpec(n_l0, n_c0, figure=fig, left=0.05, right=0.95,
-                  top=0.95, bottom=0.30, hspace=0.3, wspace=0.3)
+
+    gs = GridSpec(
+        n_l0,
+        n_c0,
+        figure=fig,
+        left=0.05,
+        right=0.95,
+        top=0.95,
+        bottom=0.30,
+        hspace=0.3,
+        wspace=0.3,
+    )
 
     axes = np.empty((n_l0, n_c0), dtype=object)
     for i in range(n_l0):
@@ -608,55 +701,89 @@ def plot_with_sliders_calibration():
 
                 # Plot replicates
                 for replicate in replicates:
-                    ax.scatter(replicate["Time"], replicate["Value"],
-                              color='grey', s=8, alpha=0.15)
+                    ax.scatter(
+                        replicate["Time"],
+                        replicate["Value"],
+                        color="grey",
+                        s=8,
+                        alpha=0.15,
+                    )
 
                 # Plot mean
-                ax.scatter(time, concentration, color='orange', s=15, alpha=0.7,
-                          label='Exp data')
+                ax.scatter(
+                    time,
+                    concentration,
+                    color="orange",
+                    s=15,
+                    alpha=0.7,
+                    label="Exp data",
+                )
 
                 # Model line
-                line, = ax.plot([], [], 'black', linewidth=1.2, label='Model')
+                (line,) = ax.plot([], [], "black", linewidth=1.2, label="Model")
 
-                r2_text = ax.text(0.98, 0.98, '', transform=ax.transAxes,
-                                  fontsize=5.5, verticalalignment='top',
-                                  horizontalalignment='right',
-                                  bbox=dict(boxstyle='round,pad=0.3',
-                                           facecolor='white', alpha=0.85,
-                                           edgecolor='gray', linewidth=0.5))
+                r2_text = ax.text(
+                    0.98,
+                    0.98,
+                    "",
+                    transform=ax.transAxes,
+                    fontsize=5.5,
+                    verticalalignment="top",
+                    horizontalalignment="right",
+                    bbox=dict(
+                        boxstyle="round,pad=0.3",
+                        facecolor="white",
+                        alpha=0.85,
+                        edgecolor="gray",
+                        linewidth=0.5,
+                    ),
+                )
 
-                plot_elements.append({
-                    'ax': ax,
-                    'line': line,
-                    'r2_text': r2_text,
-                    'c0': c0,
-                    'l0': l0,
-                    'time_exp': time,
-                    'conc_exp': concentration
-                })
+                plot_elements.append(
+                    {
+                        "ax": ax,
+                        "line": line,
+                        "r2_text": r2_text,
+                        "c0": c0,
+                        "l0": l0,
+                        "time_exp": time,
+                        "conc_exp": concentration,
+                    }
+                )
 
-                ax.set_title(f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=6, pad=2)
+                ax.set_title(
+                    f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=6, pad=2
+                )
                 ax.grid(True, alpha=0.15, linewidth=0.3)
                 ax.set_xlim(0, MAX_TIME_HOURS)
                 if j > 0:
                     ax.tick_params(labelleft=False)
                 else:
-                    ax.tick_params(axis='y', labelsize=5)
+                    ax.tick_params(axis="y", labelsize=5)
                 if i < n_l0 - 1:
                     ax.tick_params(labelbottom=False)
                 else:
-                    ax.tick_params(axis='x', labelsize=5)
+                    ax.tick_params(axis="x", labelsize=5)
                 if i == 0 and j == 0:
-                    ax.legend(fontsize=5, loc='lower right', framealpha=0.8)
+                    ax.legend(fontsize=5, loc="lower right", framealpha=0.8)
             else:
-                ax.axis('off')
+                ax.axis("off")
 
-    fig.text(0.5, 0.27, "Time (h)", ha="center", fontsize=10, weight='bold')
-    fig.text(0.02, 0.6, "Cell density (cell mL$^{-1}$)", va="center",
-            rotation="vertical", fontsize=10, weight='bold')
+    fig.text(0.5, 0.27, "Time (h)", ha="center", fontsize=10, weight="bold")
+    fig.text(
+        0.02,
+        0.6,
+        "Cell density (cell mL$^{-1}$)",
+        va="center",
+        rotation="vertical",
+        fontsize=10,
+        weight="bold",
+    )
     title_text = fig.suptitle(
-        'test (25 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/25',
-        fontsize=11, fontweight='bold')
+        "test (25 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/25",
+        fontsize=11,
+        fontweight="bold",
+    )
 
     # ==================== Sliders ====================
     axcolor = "lightgoldenrodyellow"
@@ -666,28 +793,54 @@ def plot_with_sliders_calibration():
     spacing = 0.023
 
     slider_defs = [
-        ("mu",       0.01,  1.0,   init_params['mu'],
-         r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
-        ("lambda_L", 1e-8,  1e-5,  init_params['lambda_L'],
-         r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$"),
-        ("Gamma",    1e6,   1e8,   init_params['Gamma'],
-         r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$"),
-        ("xi_c",     0.001, 0.5,   init_params['xi_c'],
-         r"$\xi_C\ (\mathrm{dimensionless})$"),
-        ("alpha",    1e-9,  1e-6,  init_params['alpha'],
-         r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$"),
-        ("L0_ref",   10,    500,   init_params['L0_ref'],
-         r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$"),
-        ("C0_ref",   0.1,   10.0,  1.0,
-         r"$C_0\ (\mathrm{dimensionless})$"),
+        ("mu", 0.01, 1.0, init_params["mu"], r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
+        (
+            "lambda_L",
+            1e-8,
+            1e-5,
+            init_params["lambda_L"],
+            r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "Gamma",
+            1e6,
+            1e8,
+            init_params["Gamma"],
+            r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$",
+        ),
+        ("xi_c", 0.001, 0.5, init_params["xi_c"], r"$\xi_C\ (\mathrm{dimensionless})$"),
+        (
+            "alpha",
+            1e-9,
+            1e-6,
+            init_params["alpha"],
+            r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "L0_ref",
+            10,
+            500,
+            init_params["L0_ref"],
+            r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$",
+        ),
+        ("C0_ref", 0.1, 10.0, 1.0, r"$C_0\ (\mathrm{dimensionless})$"),
     ]
 
     sliders = {}
     for idx, (name, vmin, vmax, val, label) in enumerate(slider_defs):
-        ax_slider = plt.axes([slider_left, 0.25 - idx*spacing, slider_width, slider_height],
-                             facecolor=axcolor)
-        sliders[name] = Slider(ax_slider, label, vmin, vmax,
-                              valinit=val, valstep=(vmax-vmin)/1000, color='black')
+        ax_slider = plt.axes(
+            [slider_left, 0.25 - idx * spacing, slider_width, slider_height],
+            facecolor=axcolor,
+        )
+        sliders[name] = Slider(
+            ax_slider,
+            label,
+            vmin,
+            vmax,
+            valinit=val,
+            valstep=(vmax - vmin) / 1000,
+            color="black",
+        )
 
     # ==================== Update function ====================
     def update(val):
@@ -697,48 +850,56 @@ def plot_with_sliders_calibration():
         n_total_graphs = len(plot_elements)
 
         # Read slider values
-        mu = sliders['mu'].val
-        lambda_L = sliders['lambda_L'].val
-        Gamma = sliders['Gamma'].val
-        xi_c = sliders['xi_c'].val
-        alpha = sliders['alpha'].val
-        L0_ref = sliders['L0_ref'].val
-        C0_ref = sliders['C0_ref'].val
+        mu = sliders["mu"].val
+        lambda_L = sliders["lambda_L"].val
+        Gamma = sliders["Gamma"].val
+        xi_c = sliders["xi_c"].val
+        alpha = sliders["alpha"].val
+        L0_ref = sliders["L0_ref"].val
+        C0_ref = sliders["C0_ref"].val
 
         for elem in plot_elements:
-            L0_cond = L0_ref * elem['l0']
+            L0_cond = L0_ref * elem["l0"]
             Ein_val = L0_cond * light_area * 3600
-            C0_cond = C0_ref * elem['c0']
+            C0_cond = C0_ref * elem["c0"]
 
             params = {
-                'mu': mu,
-                'lambda_L': lambda_L,
-                'Gamma': Gamma,
-                'xi_c': xi_c,
-                'alpha': alpha,
-                'Ein_val': Ein_val,
-                'dep': init_params['dep'],
-                'vol': init_params['vol'],
-                'K': init_params['K']
+                "mu": mu,
+                "lambda_L": lambda_L,
+                "Gamma": Gamma,
+                "xi_c": xi_c,
+                "alpha": alpha,
+                "Ein_val": Ein_val,
+                "dep": init_params["dep"],
+                "vol": init_params["vol"],
+                "K": init_params["K"],
             }
 
             try:
-                N0 = elem['conc_exp'][0] if elem['conc_exp'][0] > 0 else 1e5
+                N0 = elem["conc_exp"][0] if elem["conc_exp"][0] > 0 else 1e5
                 y0 = [N0, C0_cond]
 
-                sol = solve_ivp(kambe_full_model, t_span, y0, args=(params,),
-                              t_eval=t_eval, method='LSODA', rtol=1e-8, atol=1e-10)
+                sol = solve_ivp(
+                    kambe_full_model,
+                    t_span,
+                    y0,
+                    args=(params,),
+                    t_eval=t_eval,
+                    method="LSODA",
+                    rtol=1e-8,
+                    atol=1e-10,
+                )
 
                 if sol.success:
                     N_model = sol.y[0]
 
                     # Apply t_lag time shift
-                    t_lag = TLAG_ADJUSTMENTS.get((elem['l0'], elem['c0']), 0.0)
+                    t_lag = TLAG_ADJUSTMENTS.get((elem["l0"], elem["c0"]), 0.0)
                     t_shifted = sol.t + t_lag
-                    elem['line'].set_data(t_shifted, N_model)
+                    elem["line"].set_data(t_shifted, N_model)
 
-                    time_exp = elem['time_exp']
-                    conc_exp = elem['conc_exp']
+                    time_exp = elem["time_exp"]
+                    conc_exp = elem["conc_exp"]
                     N_interp = np.interp(time_exp, t_shifted, N_model)
                     valid_mask = ~np.isnan(conc_exp)
 
@@ -753,11 +914,11 @@ def plot_with_sliders_calibration():
                         if not np.isnan(r2_local) and r2_local >= 0.85:
                             n_good_r2 += 1
 
-                        elem['r2_text'].set_text(
-                            f'R²={r2_local:.2f}' if not np.isnan(r2_local) else 'R²=N/A'
+                        elem["r2_text"].set_text(
+                            f"R²={r2_local:.2f}" if not np.isnan(r2_local) else "R²=N/A"
                         )
-                        elem['r2_text'].get_bbox_patch().set_facecolor(
-                            '#c8f7c5' if r2_local >= 0.85 else '#f7c5c5'
+                        elem["r2_text"].get_bbox_patch().set_facecolor(
+                            "#c8f7c5" if r2_local >= 0.85 else "#f7c5c5"
                         )
 
                         all_y_exp.extend(y_exp_local)
@@ -765,11 +926,11 @@ def plot_with_sliders_calibration():
 
                     # Dynamically adjust ylim
                     max_val = max(np.nanmax(N_model), np.nanmax(conc_exp))
-                    elem['ax'].set_ylim([0, max_val * 1.2])
+                    elem["ax"].set_ylim([0, max_val * 1.2])
 
             except Exception as e:
                 logger.error(f"Error for C0={elem['c0']}, L0={elem['l0']}: {e}")
-                elem['r2_text'].set_text('R²=Err')
+                elem["r2_text"].set_text("R²=Err")
 
         # Global R²
         if len(all_y_exp) > 0:
@@ -780,10 +941,10 @@ def plot_with_sliders_calibration():
             ss_tot = np.sum((all_y_exp - y_mean) ** 2)
             global_r2 = 1 - ss_res / ss_tot if ss_tot > 0 else np.nan
 
-            r2_val = f'{global_r2:.6f}' if not np.isnan(global_r2) else 'N/A'
+            r2_val = f"{global_r2:.6f}" if not np.isnan(global_r2) else "N/A"
             title_text.set_text(
-                f'test (25 conditions)  |  Global R² = {r2_val}  |  '
-                f'Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}'
+                f"test (25 conditions)  |  Global R² = {r2_val}  |  "
+                f"Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}"
             )
 
         fig.canvas.draw_idle()
@@ -811,7 +972,7 @@ def plot_with_sliders_validation():
             new_exp = data_import.read_csv_data_plate_hand_cleaned(
                 fp,
                 conv_OD_plate_to_OD_erlen=conv_OD_plate_to_OD_erlen,
-                conv_OD_to_cell=conv_OD_to_cell
+                conv_OD_to_cell=conv_OD_to_cell,
             )
             experiments_plate.update(new_exp)
         except Exception as e:
@@ -830,10 +991,12 @@ def plot_with_sliders_validation():
     for (c0, l0), data_dict in intermediate_data_ts.items():
         key = (c0, l0)
         if key not in all_conditions:
-            all_conditions[key] = {"type": "intermediate",
-                                   "time": data_dict['time'],
-                                   "mean": data_dict['mean'],
-                                   "replicates": data_dict['replicates']}
+            all_conditions[key] = {
+                "type": "intermediate",
+                "time": data_dict["time"],
+                "mean": data_dict["mean"],
+                "replicates": data_dict["replicates"],
+            }
 
     # Organise as grid: C0 in columns (ascending), L0 in rows (descending via reversed)
     c0_values = sorted(set(k[0] for k in all_conditions.keys()))
@@ -844,15 +1007,15 @@ def plot_with_sliders_validation():
 
     # Initial Kambe model parameters
     init_params = {
-        'mu': 0.167,
-        'lambda_L': 0.012e-5,
-        'Gamma': 0.64e8,
-        'xi_c': 0.008,
-        'alpha': 0.013e-6,
-        'L0_ref': 170,
-        'dep': 0.5,      # culture depth [cm] - plate
-        'vol': 0.2,      # culture volume [ml] - plate
-        'K': 1e-8        # extinction coefficient [ml cm^-1 cell^-1]
+        "mu": 0.167,
+        "lambda_L": 0.012e-5,
+        "Gamma": 0.64e8,
+        "xi_c": 0.008,
+        "alpha": 0.013e-6,
+        "L0_ref": 170,
+        "dep": 0.5,  # culture depth [cm] - plate
+        "vol": 0.2,  # culture volume [ml] - plate
+        "K": 1e-8,  # extinction coefficient [ml cm^-1 cell^-1]
     }
 
     # Simulation configuration
@@ -860,10 +1023,20 @@ def plot_with_sliders_validation():
     t_span = (0, MAX_TIME_HOURS)
     t_eval = np.linspace(0, MAX_TIME_HOURS, 1000)
 
-    fig = plt.figure(figsize=(1.2*n_c0, 2*n_l0 + 3))
+    fig = plt.figure(figsize=(1.2 * n_c0, 2 * n_l0 + 3))
     from matplotlib.gridspec import GridSpec
-    gs = GridSpec(n_l0, n_c0, figure=fig, left=0.05, right=0.95,
-                  top=0.95, bottom=0.30, hspace=0.3, wspace=0.3)
+
+    gs = GridSpec(
+        n_l0,
+        n_c0,
+        figure=fig,
+        left=0.05,
+        right=0.95,
+        top=0.95,
+        bottom=0.30,
+        hspace=0.3,
+        wspace=0.3,
+    )
 
     axes = np.empty((n_l0, n_c0), dtype=object)
     for i in range(n_l0):
@@ -893,55 +1066,89 @@ def plot_with_sliders_validation():
 
                 # Plot replicates
                 for replicate in replicates:
-                    ax.scatter(replicate["Time"], replicate["Value"],
-                              color='grey', s=8, alpha=0.15)
+                    ax.scatter(
+                        replicate["Time"],
+                        replicate["Value"],
+                        color="grey",
+                        s=8,
+                        alpha=0.15,
+                    )
 
                 # Plot mean
-                ax.scatter(time, concentration, color='orange', s=15, alpha=0.7,
-                          label='Exp data')
+                ax.scatter(
+                    time,
+                    concentration,
+                    color="orange",
+                    s=15,
+                    alpha=0.7,
+                    label="Exp data",
+                )
 
                 # Model line
-                line, = ax.plot([], [], 'black', linewidth=1.2, label='Model')
+                (line,) = ax.plot([], [], "black", linewidth=1.2, label="Model")
 
-                r2_text = ax.text(0.98, 0.98, '', transform=ax.transAxes,
-                                  fontsize=5.5, verticalalignment='top',
-                                  horizontalalignment='right',
-                                  bbox=dict(boxstyle='round,pad=0.3',
-                                           facecolor='white', alpha=0.85,
-                                           edgecolor='gray', linewidth=0.5))
+                r2_text = ax.text(
+                    0.98,
+                    0.98,
+                    "",
+                    transform=ax.transAxes,
+                    fontsize=5.5,
+                    verticalalignment="top",
+                    horizontalalignment="right",
+                    bbox=dict(
+                        boxstyle="round,pad=0.3",
+                        facecolor="white",
+                        alpha=0.85,
+                        edgecolor="gray",
+                        linewidth=0.5,
+                    ),
+                )
 
-                plot_elements.append({
-                    'ax': ax,
-                    'line': line,
-                    'r2_text': r2_text,
-                    'c0': c0,
-                    'l0': l0,
-                    'time_exp': time,
-                    'conc_exp': concentration
-                })
+                plot_elements.append(
+                    {
+                        "ax": ax,
+                        "line": line,
+                        "r2_text": r2_text,
+                        "c0": c0,
+                        "l0": l0,
+                        "time_exp": time,
+                        "conc_exp": concentration,
+                    }
+                )
 
-                ax.set_title(f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=6, pad=2)
+                ax.set_title(
+                    f"$C_0 \\times {c0:.2f}$, $L_0 \\times {l0:.2f}$", fontsize=6, pad=2
+                )
                 ax.grid(True, alpha=0.15, linewidth=0.3)
                 ax.set_xlim(0, MAX_TIME_HOURS)
                 if j > 0:
                     ax.tick_params(labelleft=False)
                 else:
-                    ax.tick_params(axis='y', labelsize=5)
+                    ax.tick_params(axis="y", labelsize=5)
                 if i < n_l0 - 1:
                     ax.tick_params(labelbottom=False)
                 else:
-                    ax.tick_params(axis='x', labelsize=5)
+                    ax.tick_params(axis="x", labelsize=5)
                 if i == 0 and j == 0:
-                    ax.legend(fontsize=5, loc='lower right', framealpha=0.8)
+                    ax.legend(fontsize=5, loc="lower right", framealpha=0.8)
             else:
-                ax.axis('off')
+                ax.axis("off")
 
-    fig.text(0.5, 0.27, "Time (h)", ha="center", fontsize=10, weight='bold')
-    fig.text(0.02, 0.6, "Cell density (cell mL$^{-1}$)", va="center",
-            rotation="vertical", fontsize=10, weight='bold')
+    fig.text(0.5, 0.27, "Time (h)", ha="center", fontsize=10, weight="bold")
+    fig.text(
+        0.02,
+        0.6,
+        "Cell density (cell mL$^{-1}$)",
+        va="center",
+        rotation="vertical",
+        fontsize=10,
+        weight="bold",
+    )
     title_text = fig.suptitle(
-        'Validation (85 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/85',
-        fontsize=11, fontweight='bold')
+        "Validation (85 conditions)  |  Global R² = Calculating...  |  Conditions R² ≥ 0.85 (green) : -/85",
+        fontsize=11,
+        fontweight="bold",
+    )
 
     # ==================== Sliders ====================
     axcolor = "lightgoldenrodyellow"
@@ -951,28 +1158,54 @@ def plot_with_sliders_validation():
     spacing = 0.023
 
     slider_defs = [
-        ("mu",       0.01,  1.0,   init_params['mu'],
-         r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
-        ("lambda_L", 1e-8,  1e-5,  init_params['lambda_L'],
-         r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$"),
-        ("Gamma",    1e6,   1e8,   init_params['Gamma'],
-         r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$"),
-        ("xi_c",     0.001, 0.5,   init_params['xi_c'],
-         r"$\xi_C\ (\mathrm{dimensionless})$"),
-        ("alpha",    1e-9,  1e-6,  init_params['alpha'],
-         r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$"),
-        ("L0_ref",   10,    500,   init_params['L0_ref'],
-         r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$"),
-        ("C0_ref",   0.1,   10.0,  1.0,
-         r"$C_0\ (\mathrm{dimensionless})$"),
+        ("mu", 0.01, 1.0, init_params["mu"], r"$\mu_{\max}\ (\mathrm{h}^{-1})$"),
+        (
+            "lambda_L",
+            1e-8,
+            1e-5,
+            init_params["lambda_L"],
+            r"$\lambda_L\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{h}^{-1}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "Gamma",
+            1e6,
+            1e8,
+            init_params["Gamma"],
+            r"$\Gamma\ (\mathrm{cells}\ \mathrm{mL}^{-1})$",
+        ),
+        ("xi_c", 0.001, 0.5, init_params["xi_c"], r"$\xi_C\ (\mathrm{dimensionless})$"),
+        (
+            "alpha",
+            1e-9,
+            1e-6,
+            init_params["alpha"],
+            r"$\alpha\ (\mathrm{mL}\ \mathrm{cell}^{-1})$",
+        ),
+        (
+            "L0_ref",
+            10,
+            500,
+            init_params["L0_ref"],
+            r"$L_0\ (\mu\mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1})$",
+        ),
+        ("C0_ref", 0.1, 10.0, 1.0, r"$C_0\ (\mathrm{dimensionless})$"),
     ]
 
     sliders = {}
     for idx, (name, vmin, vmax, val, label) in enumerate(slider_defs):
-        ax_slider = plt.axes([slider_left, 0.25 - idx*spacing, slider_width, slider_height],
-                             facecolor=axcolor)
-        sliders[name] = Slider(ax_slider, label, vmin, vmax,
-                              valinit=val, valstep=(vmax-vmin)/1000, color='black')
+        ax_slider = plt.axes(
+            [slider_left, 0.25 - idx * spacing, slider_width, slider_height],
+            facecolor=axcolor,
+        )
+        sliders[name] = Slider(
+            ax_slider,
+            label,
+            vmin,
+            vmax,
+            valinit=val,
+            valstep=(vmax - vmin) / 1000,
+            color="black",
+        )
 
     # ==================== Update function ====================
     def update(val):
@@ -982,48 +1215,56 @@ def plot_with_sliders_validation():
         n_total_graphs = len(plot_elements)
 
         # Read slider values
-        mu = sliders['mu'].val
-        lambda_L = sliders['lambda_L'].val
-        Gamma = sliders['Gamma'].val
-        xi_c = sliders['xi_c'].val
-        alpha = sliders['alpha'].val
-        L0_ref = sliders['L0_ref'].val
-        C0_ref = sliders['C0_ref'].val
+        mu = sliders["mu"].val
+        lambda_L = sliders["lambda_L"].val
+        Gamma = sliders["Gamma"].val
+        xi_c = sliders["xi_c"].val
+        alpha = sliders["alpha"].val
+        L0_ref = sliders["L0_ref"].val
+        C0_ref = sliders["C0_ref"].val
 
         for elem in plot_elements:
-            L0_cond = L0_ref * elem['l0']
+            L0_cond = L0_ref * elem["l0"]
             Ein_val = L0_cond * light_area * 3600
-            C0_cond = C0_ref * elem['c0']
+            C0_cond = C0_ref * elem["c0"]
 
             params = {
-                'mu': mu,
-                'lambda_L': lambda_L,
-                'Gamma': Gamma,
-                'xi_c': xi_c,
-                'alpha': alpha,
-                'Ein_val': Ein_val,
-                'dep': init_params['dep'],
-                'vol': init_params['vol'],
-                'K': init_params['K']
+                "mu": mu,
+                "lambda_L": lambda_L,
+                "Gamma": Gamma,
+                "xi_c": xi_c,
+                "alpha": alpha,
+                "Ein_val": Ein_val,
+                "dep": init_params["dep"],
+                "vol": init_params["vol"],
+                "K": init_params["K"],
             }
 
             try:
-                N0 = elem['conc_exp'][0] if elem['conc_exp'][0] > 0 else 1e5
+                N0 = elem["conc_exp"][0] if elem["conc_exp"][0] > 0 else 1e5
                 y0 = [N0, C0_cond]
 
-                sol = solve_ivp(kambe_full_model, t_span, y0, args=(params,),
-                              t_eval=t_eval, method='LSODA', rtol=1e-8, atol=1e-10)
+                sol = solve_ivp(
+                    kambe_full_model,
+                    t_span,
+                    y0,
+                    args=(params,),
+                    t_eval=t_eval,
+                    method="LSODA",
+                    rtol=1e-8,
+                    atol=1e-10,
+                )
 
                 if sol.success:
                     N_model = sol.y[0]
 
                     # Apply t_lag time shift
-                    t_lag = TLAG_ADJUSTMENTS.get((elem['l0'], elem['c0']), 0.0)
+                    t_lag = TLAG_ADJUSTMENTS.get((elem["l0"], elem["c0"]), 0.0)
                     t_shifted = sol.t + t_lag
-                    elem['line'].set_data(t_shifted, N_model)
+                    elem["line"].set_data(t_shifted, N_model)
 
-                    time_exp = elem['time_exp']
-                    conc_exp = elem['conc_exp']
+                    time_exp = elem["time_exp"]
+                    conc_exp = elem["conc_exp"]
                     N_interp = np.interp(time_exp, t_shifted, N_model)
                     valid_mask = ~np.isnan(conc_exp)
 
@@ -1038,11 +1279,11 @@ def plot_with_sliders_validation():
                         if not np.isnan(r2_local) and r2_local >= 0.85:
                             n_good_r2 += 1
 
-                        elem['r2_text'].set_text(
-                            f'R²={r2_local:.2f}' if not np.isnan(r2_local) else 'R²=N/A'
+                        elem["r2_text"].set_text(
+                            f"R²={r2_local:.2f}" if not np.isnan(r2_local) else "R²=N/A"
                         )
-                        elem['r2_text'].get_bbox_patch().set_facecolor(
-                            '#c8f7c5' if r2_local >= 0.85 else '#f7c5c5'
+                        elem["r2_text"].get_bbox_patch().set_facecolor(
+                            "#c8f7c5" if r2_local >= 0.85 else "#f7c5c5"
                         )
 
                         all_y_exp.extend(y_exp_local)
@@ -1050,11 +1291,11 @@ def plot_with_sliders_validation():
 
                     # Dynamically adjust ylim
                     max_val = max(np.nanmax(N_model), np.nanmax(conc_exp))
-                    elem['ax'].set_ylim([0, max_val * 1.2])
+                    elem["ax"].set_ylim([0, max_val * 1.2])
 
             except Exception as e:
                 logger.error(f"Error for C0={elem['c0']}, L0={elem['l0']}: {e}")
-                elem['r2_text'].set_text('R²=Err')
+                elem["r2_text"].set_text("R²=Err")
 
         # Global R²
         if len(all_y_exp) > 0:
@@ -1065,10 +1306,10 @@ def plot_with_sliders_validation():
             ss_tot = np.sum((all_y_exp - y_mean) ** 2)
             global_r2 = 1 - ss_res / ss_tot if ss_tot > 0 else np.nan
 
-            r2_val = f'{global_r2:.6f}' if not np.isnan(global_r2) else 'N/A'
+            r2_val = f"{global_r2:.6f}" if not np.isnan(global_r2) else "N/A"
             title_text.set_text(
-                f'Validation (85 conditions)  |  Global R² = {r2_val}  |  '
-                f'Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}'
+                f"Validation (85 conditions)  |  Global R² = {r2_val}  |  "
+                f"Conditions R² ≥ 0.85 (green) : {n_good_r2}/{n_total_graphs}"
             )
 
         fig.canvas.draw_idle()
@@ -1083,20 +1324,22 @@ def plot_with_sliders_validation():
 # ==================== MAIN ====================
 if __name__ == "__main__":
     # Display the three figures in order
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info("Generating test figure (7 specific conditions)")
-    logger.info("Conditions: (1,1), (0.5,1), (0.125,1), (1,0.6), (0.25,0.6), (0.25,0.3), (1,0.15)")
-    logger.info("="*60)
+    logger.info(
+        "Conditions: (1,1), (0.5,1), (0.125,1), (1,0.6), (0.25,0.6), (0.25,0.3), (1,0.15)"
+    )
+    logger.info("=" * 60)
     plot_with_sliders_test()
 
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info("Generating calibration figure (C0=1, 0.5, 0.25, 0.125, 0.0625)")
-    logger.info("="*60)
+    logger.info("=" * 60)
     plot_with_sliders_calibration()
 
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info("Generating validation figure (all conditions)")
-    logger.info("="*60)
+    logger.info("=" * 60)
     plot_with_sliders_validation()
 
 

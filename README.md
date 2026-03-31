@@ -46,6 +46,7 @@ This is a description of the purpose of each scripts:
 - `format_Kambe_2022_data.py` allows to format the data from [Kambe et al. 2022] contains in a `.xlsx` file into `.csv` files
 - `cyto_processing.py` allows to process flow cytometry data flow_cytometry_data.fcs in `all_data` folder
 
+
 ## Setup
 The code is running with Python 3.12.8. All libraries needed to run the code can be installed with the command:
 ```bash
@@ -72,7 +73,6 @@ The following datasets, not shown in the main manuscript, are available for visu
 These data can be visualized in the `supplementary_figures.pdf` document in `all_data` folder.
 
 ### Reproducibility
-
 To facilitate reproducibility, the document `supplementary_tables.pdf` in `all_data` folder provides fitted parameter values and performance metrics for all models tested on the dataset.
 
 ## References

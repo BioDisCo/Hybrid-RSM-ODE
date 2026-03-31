@@ -8,6 +8,7 @@ import pandas as pd
 
 OdData = dict[str, list[float]]
 
+
 def trimmed_mean(values: list | np.ndarray, fraction: float = 0.25) -> float:
     """Calculate mean by dropping min and max values (fault-tolerant).
 
@@ -54,6 +55,7 @@ class ExperimentalData(TypedDict):
 
 
 Experiments = dict[str, ExperimentalData]
+
 
 # FLASK DATA READING
 def read_csv_data_erlen(
@@ -117,7 +119,9 @@ def read_csv_data_erlen(
             )
             # C0 factor is encodes as powers of 1/2 for Erlen.
             C0_factor = 0.5 ** float(c0)
-            C0_factor_corrected = 0.57 ** float(c0)  # just to check if this could have experimentally happened
+            C0_factor_corrected = 0.57 ** float(
+                c0
+            )  # just to check if this could have experimentally happened
 
             # get replicate data
             replicates: list[IndividualCurve] = []
@@ -168,6 +172,7 @@ def read_csv_data_erlen(
 
     return ret_dict
 
+
 # PLATE RAW DATA READING
 def read_csv_data_plate(
     filepath: str,
@@ -186,7 +191,11 @@ def read_csv_data_plate(
     ]
 
     # Find the last row where *all* columns of interest are valid (non-NaN)
-    dernier_index_valide = df[colonnes_interessees].index[-1]  # better to deal with NaN value in corrected dataset instead of the line dernier_index_valide = df[colonnes_interessees].dropna(how="any").index[-1]
+    dernier_index_valide = df[
+        colonnes_interessees
+    ].index[
+        -1
+    ]  # better to deal with NaN value in corrected dataset instead of the line dernier_index_valide = df[colonnes_interessees].dropna(how="any").index[-1]
 
     # Truncate the DataFrame up to this row
     df = df.loc[:dernier_index_valide]
@@ -211,7 +220,7 @@ def read_csv_data_plate(
     L0_factor: float = 1
     date_str: str = ""
     if "21-10-24" in filepath or "04-11-24" in filepath:
-        L0_factor = 0.15  
+        L0_factor = 0.15
         date_str = "21_10_2024"
     elif "cleaned_16-09-24" in filepath:
         L0_factor = 0.07
@@ -260,7 +269,7 @@ def read_csv_data_plate(
             for f in replicate_files:
                 df_rep = pd.read_csv(f, sep=";")
                 time = df_rep["Time (hour)"].to_list()
-                for r in range(1, 25): # 25 is the maximum number of replicates
+                for r in range(1, 25):  # 25 is the maximum number of replicates
                     col_name = f"C0 = {c0} R{r}"
                     if col_name in df_rep.keys():
                         value = (
@@ -322,9 +331,7 @@ def read_csv_data_erlen_Kambe(
     df = pd.read_csv(filepath, sep=";")
 
     # Select useful columns
-    colonnes_interessees = [
-        col for col in df.columns if col.startswith(("mean "))
-    ]
+    colonnes_interessees = [col for col in df.columns if col.startswith(("mean "))]
 
     # Find the last row where *all* columns of interest are valid (non-NaN)
     dernier_index_valide = df[colonnes_interessees].dropna(how="any").index[-1]
@@ -430,6 +437,7 @@ def set_min(exp: Experiments, min_value: float = 0.01) -> Experiments:
             "replicates": e["replicates"],
         }
     return ret_dict
+
 
 # PLATE HAND-CLEANED DATA READING
 def read_csv_data_plate_hand_cleaned(

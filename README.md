@@ -10,7 +10,7 @@ Time series of C. reinhardtii cultures and their pre-processing are in the folde
 Time series of Monoraphidium sp. cultures can be obtained in [Kambe et al. 2022] repository available at the following link: https://github.com/hori-group/logistic_eq_for_cultivation_planning
 The dataset is contained in the folder `_OD_excel_data` in the file `OD_data.xlsx`. By running the script `format_Kambe_2022_data.py` from this repository it will create a folder `data_Kambe` containing 4 csv files with OD time series of Monoraphidium at four light intensities (0.274, 0.521, 1.09, 2.92 $\mu mol_{h\nu} \cdot s^{-1}$) containing each 4 dilutions of the BG-11 medium conditions $C_{0} = 1, 0.5, 0.25, 0.125, 0.0625$ in the column 'mean 0', 'mean 1', 'mean 2', 'mean 3' and 'mean 4', respectively.
 
-All details concerning the collecting of C.reinhardtii data and their pre-processing are available in the 'Methods' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper. 
+All details concerning the collecting of C.reinhardtii data and their pre-processing are available in the 'Methods' section of 'Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients' paper.
 
 ## Models
 The models used to benchmark RSM-ODE model are : 
@@ -27,7 +27,7 @@ This is a description of the purpose of each scripts:
 - `data_import.py` allows to import the different dataset (Monoraphidium sp. and C. reinhardtii growth curves)
 - `DMB_sliders_erlen.py` generates the visual adjustment of Droop model from [Martínez et al. 2020] on C. reinhardtii flask cultures data
 - `DMB_sliders_plate.py` generates the visual adjustment of Droop model from [Martínez et al. 2020] on C. reinhardtii microplate cultures data
-- `final_dataset_composition.py` is applying linearity correction steps to the C. reinhardtii growth data in microplate [TO CHECK]
+- `final_dataset_composition.py` is applying linearity correction steps to the C. reinhardtii growth data in microplate 
 - `Monoraphidium_data_RSM_ODE.py` is fitting the RSM-ODE model on Monoraphidium sp. growth data from [Kambe et al. 2022]
 - `Monoraphidium_data_LMMB.py` is fitting the LMMB model developed in [Kambe et al. 2022] on Monoraphidium sp. growth data to reproduce the results authors obtains and compute a global $R^2$. 
 - `Chlamydomonas_data_RSM_ODE_erlen.py` is fitting the RSM-ODE model on C. reinhardtii flask cultures data
@@ -44,6 +44,7 @@ This is a description of the purpose of each scripts:
 - `rsm_surface_comparison_erlen.py` generates a comparative study between surface functions used for $\mu_{max}(C_{0}, L_{0})$ and $N_{max}(C_{0}, L_{0})$ for C. reinhardtii flask culture dataset.
 - `rsm_surface_comparison_plate.py` generates a comparative study between surface functions used for $\mu_{max}(C_{0}, L_{0})$ and $N_{max}(C_{0}, L_{0})$ for C. reinhardtii plate culture dataset.
 - `format_Kambe_2022_data.py` allows to format the data from [Kambe et al. 2022] contains in a `.xlsx` file into `.csv` files
+- `cyto_processing.py` allows to process flow cytometry data flow_cytometry_data.fcs in all_data folder
 
 ## Setup
 The code is running with Python 3.12.8. All libraries needed to run the code can be installed with the command:
@@ -56,6 +57,23 @@ Warning: The following scripts needs to be run after running `Chlamydomonas_data
 - `LMMB_sliders_erlen.py` and `LMMB_sliders_plate.py`
 - `MMmB_sliders_erlen.py` and `MMmB_sliders_plate.py`
 - `scaling_surfaces.py`
+
+## Supplementary information
+This repository contains supplementary data and materials associated with the paper "Embedding response surfaces in kinetic models predicts microalgae growth across light and nutrient gradients." These resources are provided to support transparency, reproducibility, and reuse.
+
+### Supplementary data
+The following datasets, not shown in the main manuscript, are available for visualization and reuse:
+
+- Time-series chlorophyll fluorescence measurements (excitation 430 nm, emission 645 nm) for both flask and microplate cultures at $L_{0} = 102$ and $170 \mu mol_{h\nu} \cdot s^{-1}$ across all five medium dilutions $C_{0} = 1, 1/2, 1/4, 1/8$ and $1/16$. For microplate cultures, intermediate dilutions ($C_{0} = 1 − 0.05·i$, for $i = 0$ to $17$) were additionally measured.
+- Confocal microscopy images (Leica TCS SP8) of cells cultivated in flasks at $L_{0} = 25.5 \mu mol_{h\nu} \cdot s^{-1}$  across all five medium dilutions.
+- Flow cytometry analysis (Guava easyCyte, EMD Millipore) of microalgae population structure at $L_{0} = 11.9 \mu mol_{h\nu} \cdot s^{-1}$ for five TAP medium dilutions.
+- RSM cross-sections and sensitivity analysis derived from microplate data.
+
+These data can be visualized in the `supplementary_figures.pdf` document.
+
+### Reproducibility
+
+To facilitate reproducibility, the document `supplementary_tables.pdf` provides fitted parameter values and performance metrics for all models tested on the dataset.
 
 ## References
 [Kambe et al. 2022] Kazuki Kambe, Yasutaka Hirokawa, Asuka Koshi, and Yutaka Hori. A parametric logistic equation with light

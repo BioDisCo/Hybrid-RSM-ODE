@@ -44,7 +44,7 @@ This is a description of the purpose of each scripts:
 - `rsm_surface_comparison_erlen.py` generates a comparative study between surface functions used for $\mu_{max}(C_{0}, L_{0})$ and $N_{max}(C_{0}, L_{0})$ for C. reinhardtii flask culture dataset.
 - `rsm_surface_comparison_plate.py` generates a comparative study between surface functions used for $\mu_{max}(C_{0}, L_{0})$ and $N_{max}(C_{0}, L_{0})$ for C. reinhardtii plate culture dataset.
 - `format_Kambe_2022_data.py` allows to format the data from [Kambe et al. 2022] contains in a `.xlsx` file into `.csv` files
-- `cyto_processing.py` allows to process flow cytometry data flow_cytometry_data.fcs in all_data folder
+- `cyto_processing.py` allows to process flow cytometry data flow_cytometry_data.fcs in `all_data` folder
 
 ## Setup
 The code is running with Python 3.12.8. All libraries needed to run the code can be installed with the command:
@@ -69,11 +69,11 @@ The following datasets, not shown in the main manuscript, are available for visu
 - Flow cytometry analysis (Guava easyCyte, EMD Millipore) of microalgae population structure at $L_{0} = 11.9 \mu mol_{h\nu} \cdot s^{-1}$ for five TAP medium dilutions.
 - RSM cross-sections and sensitivity analysis derived from microplate data.
 
-These data can be visualized in the `supplementary_figures.pdf` document.
+These data can be visualized in the `supplementary_figures.pdf` document in `all_data` folder.
 
 ### Reproducibility
 
-To facilitate reproducibility, the document `supplementary_tables.pdf` provides fitted parameter values and performance metrics for all models tested on the dataset.
+To facilitate reproducibility, the document `supplementary_tables.pdf` in `all_data` folder provides fitted parameter values and performance metrics for all models tested on the dataset.
 
 ## References
 [Kambe et al. 2022] Kazuki Kambe, Yasutaka Hirokawa, Asuka Koshi, and Yutaka Hori. A parametric logistic equation with light

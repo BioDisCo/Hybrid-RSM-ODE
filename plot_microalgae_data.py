@@ -242,7 +242,7 @@ def create_combined_figure(time_kambe, od_kambe, all_data_chlamy):
             )
 
         ein_val = ein_kambe[light_idx]
-        ax.set_title(rf"$L_0$ = {ein_val:.1f} {LIGHT_UNIT}", pad=18)
+        ax.set_title(rf"{ein_val:.0f} {LIGHT_UNIT}", pad=18)
         ax.set_xlabel("Time (h)")
         if idx_graph == 0:
             ax.set_ylabel(r"Biomass (cells mL$^{-1}$ × $10^{8}$)", labelpad=20)
@@ -305,7 +305,8 @@ def create_combined_figure(time_kambe, od_kambe, all_data_chlamy):
                     markersize=9,
                 )
 
-        ax.set_title(rf"$L_0$ = {L0_val:.1f} {LIGHT_UNIT}", pad=18)
+        fmt = ".1f" if idx_L0 == 3 else ".0f"
+        ax.set_title(rf"{L0_val:{fmt}} {LIGHT_UNIT}", pad=18)
         ax.set_xlabel("Time (h)")
         if idx_L0 == 0:
             ax.set_ylabel(r"Biomass (cells mL$^{-1}$ × $10^{7}$)", labelpad=20)
@@ -391,7 +392,7 @@ def create_combined_figure(time_kambe, od_kambe, all_data_chlamy):
             alpha=0.7,
         )
 
-    ax_zoom1.set_title(rf"Zoom $L_0$ = 386.7 {LIGHT_UNIT}", pad=18)
+    ax_zoom1.set_title(rf"Zoom 387 {LIGHT_UNIT}", pad=18)
     ax_zoom1.set_xlabel("Time (h)")
     ax_zoom1.set_ylabel("Biomass (cells mL$^{-1}$ × $10^{7}$)")
     ax_zoom1.set_xlim([0, 60])
@@ -443,7 +444,7 @@ def create_combined_figure(time_kambe, od_kambe, all_data_chlamy):
                 alpha=0.7,
             )
 
-    ax_zoom2.set_title(rf"Zoom $L_0$ = 102 {LIGHT_UNIT}", pad=18)
+    ax_zoom2.set_title(rf"Zoom 102 {LIGHT_UNIT}", pad=18)
     ax_zoom2.set_xlabel("Time (h)")
     # ax_zoom2.set_ylabel('Biomass (cells mL$^{-1}$ × $10^{7}$)')
     ax_zoom2.set_xlim([0, 60])

@@ -11,7 +11,7 @@ times = df_raw.iloc[3, 4:].values.astype(int)  # time points as integers
 data_rows = df_raw.iloc[4:].reset_index(drop=True)
 
 # ── Build output directory ────────────────────────────────────────────────────
-os.makedirs("data_Kambe_test", exist_ok=True)
+os.makedirs("data_Kambe", exist_ok=True)
 
 # ── Generate one CSV per Ein value ────────────────────────────────────────────
 ein_values = data_rows.iloc[:, 1].unique()  # [0.274, 0.521, 1.09, 2.92]
@@ -30,7 +30,7 @@ for ein in ein_values:
 
     # Write CSV with semicolon separator, NaN as empty string
     ein_str = str(ein)
-    filepath = os.path.join("data_Kambe_test", f"data-Ein-{ein_str}.csv")
+    filepath = os.path.join("data_Kambe", f"data-Ein-{ein_str}.csv")
     out.to_csv(filepath, sep=";", index=False, na_rep="")
     print(f"Written: {filepath}")
 

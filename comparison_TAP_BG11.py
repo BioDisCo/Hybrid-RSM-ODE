@@ -634,9 +634,9 @@ if __name__ == "__main__":
         if col == 0:
             ax.set_ylabel(r"Biomass (cell mL$^{-1}$)")
         light_title_ab = (
-            r"$L_0 = 51\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
+            r"$51\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
             if col == 0
-            else r"$L_0 = 102\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
+            else r"$102\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
         )
         ax.set_title(f"{light_title_ab}", fontweight="bold", pad=18)
         ax.set_yscale("log")
@@ -771,9 +771,9 @@ if __name__ == "__main__":
             ax.set_ylabel(r"$\mu_{max}$ (h$^{-1}$)")
         ax.set_xlabel(r"$C_0$")
         light_title = (
-            r"$L_0 = 51\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
+            r"$51\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
             if col == 0
-            else r"$L_0 = 102\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
+            else r"$102\ \mu \mathrm{mol}_{h\nu}\ \mathrm{m}^{-2}\ \mathrm{s}^{-1}$"
         )
         ax.set_title(f"{light_title}", fontweight="bold", pad=18)
         ax.set_xticks(x)

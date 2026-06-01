@@ -122,6 +122,14 @@ def analyser_panel_datasets(fichier, canal_chloro, canal_fsc, canal_ssc,
 
         conc_label = conc_labels[idx]
 
+        mask = (data[canal_fsc] > 0) & (data[canal_chloro] > 0)
+        slope_chl_fsc, _ = np.polyfit(
+            np.log10(data[canal_fsc][mask]),
+            np.log10(data[canal_chloro][mask]),
+            1
+        )
+        print(f"{conc_label}: pente Chl(FSC) = {slope_chl_fsc:.4f}")
+
         legend_loc = 'upper left' if idx == 2 else 'upper right'
 
         def _hist_corr(ax, values, bins, titre, show_ylabel=False, show_legend=False,

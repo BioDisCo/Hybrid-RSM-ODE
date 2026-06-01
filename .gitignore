@@ -197,7 +197,6 @@ results_scaling/
 surfaces_comparison/
 OD_data.xlsx
 
-*.pdf
 *.png
 
 .DS_Store

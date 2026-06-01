@@ -65,9 +65,9 @@ This repository contains supplementary data and materials associated with the pa
 ### Supplementary data
 The following datasets, not shown in the main manuscript, are available for visualization and reuse:
 
-- Time-series chlorophyll fluorescence measurements (excitation 430 nm, emission 645 nm) for both flask and microplate cultures at $L_{0} = 102$ and $170 \mu mol_{h\nu} \cdot s^{-1}$ across all five medium dilutions $C_{0} = 1, 1/2, 1/4, 1/8$ and $1/16$. For microplate cultures, intermediate dilutions ($C_{0} = 1 − 0.05·i$, for $i = 0$ to $17$) were additionally measured.
-- Confocal microscopy images (Leica TCS SP8) of cells cultivated in flasks at $L_{0} = 25.5 \mu mol_{h\nu} \cdot s^{-1}$  across all five medium dilutions.
-- Flow cytometry analysis (Guava easyCyte, EMD Millipore) of microalgae population structure at $L_{0} = 11.9 \mu mol_{h\nu} \cdot s^{-1}$ for five TAP medium dilutions.
+- Time-series chlorophyll fluorescence measurements (excitation 430 nm, emission 645 nm) for both flask and microplate cultures at $102$ and $170 \mu mol_{h\nu} \cdot s^{-1}$ across all five medium dilutions $C_{0} = 1, 1/2, 1/4, 1/8$ and $1/16$. For microplate cultures, intermediate dilutions ($C_{0} = 1 − 0.05·i$, for $i = 0$ to $17$) were additionally measured.
+- Confocal microscopy images (Leica TCS SP8) of cells cultivated in flasks at $25.5 \mu mol_{h\nu} \cdot s^{-1}$  across all five medium dilutions.
+- Flow cytometry analysis (Guava easyCyte, EMD Millipore) of microalgae population structure at $11.9 \mu mol_{h\nu} \cdot s^{-1}$ for five TAP medium dilutions.
 - RSM cross-sections and sensitivity analysis derived from microplate data.
 
 These data can be visualized in the `supplementary_figures.pdf` document in `all_data` folder.

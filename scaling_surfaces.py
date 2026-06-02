@@ -280,7 +280,7 @@ def plot_superimposed_surfaces(params):
         edgecolor="none",
     )
 
-    ax1.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=12, labelpad=10)
+    ax1.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=12, labelpad=10)
     ax1.set_ylabel("$C_0$", fontsize=12, labelpad=10)
     ax1.set_zlabel("$\\mu_{max}$ (h⁻¹)", fontsize=12, labelpad=10)
     ax1.set_title(
@@ -321,7 +321,7 @@ def plot_superimposed_surfaces(params):
         edgecolor="none",
     )
 
-    ax2.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=12, labelpad=10)
+    ax2.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=12, labelpad=10)
     ax2.set_ylabel("$C_0$", fontsize=12, labelpad=10)
     ax2.set_zlabel("$N_{max}$ (cells/mL)", fontsize=12, labelpad=10)
     ax2.set_title(
@@ -405,7 +405,7 @@ def plot_nmax_scaling(params):
         L0_grid, C0_grid, n_erlen, color="orange", alpha=0.6, edgecolor="none"
     )
 
-    ax1.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
+    ax1.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
     ax1.set_ylabel("$C_0$", fontsize=11, labelpad=8)
     ax1.set_zlabel("$N_{max}$", fontsize=11, labelpad=8)
     ax1.set_title("Original Surfaces", fontsize=12, pad=15)
@@ -435,7 +435,7 @@ def plot_nmax_scaling(params):
         L0_grid, C0_grid, n_erlen, color="orange", alpha=0.6, edgecolor="none"
     )
 
-    ax2.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
+    ax2.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
     ax2.set_ylabel("$C_0$", fontsize=11, labelpad=8)
     ax2.set_zlabel("$N_{max}$", fontsize=11, labelpad=8)
     ax2.set_title(f"Scaled Plate vs Erlen\nR² = {r2_scaled:.4f}", fontsize=12, pad=15)
@@ -469,7 +469,7 @@ def plot_nmax_scaling(params):
     cbar = plt.colorbar(im, ax=ax3)
     cbar.set_label("Relative error (%)", fontsize=11)
 
-    ax3.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11)
+    ax3.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11)
     ax3.set_ylabel("$C_0$", fontsize=11)
     ax3.set_title("Relative error: (Erlen - Scaled Plate) / Erlen", fontsize=12)
 
@@ -608,7 +608,7 @@ def plot_mumax_scaling(params):
         L0_grid, C0_grid, mu_erlen, color="seagreen", alpha=0.6, edgecolor="none"
     )
 
-    ax1.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
+    ax1.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
     ax1.set_ylabel("$C_0$", fontsize=11, labelpad=8)
     ax1.set_zlabel("$\\mu_{max}$ (h⁻¹)", fontsize=11, labelpad=8)
     ax1.set_title("Original Surfaces", fontsize=12, pad=15)
@@ -636,7 +636,7 @@ def plot_mumax_scaling(params):
         L0_grid, C0_grid, mu_erlen, color="seagreen", alpha=0.6, edgecolor="none"
     )
 
-    ax2.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
+    ax2.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11, labelpad=8)
     ax2.set_ylabel("$C_0$", fontsize=11, labelpad=8)
     ax2.set_zlabel("$\\mu_{max}$ (h⁻¹)", fontsize=11, labelpad=8)
     ax2.set_title(f"Scaled Plate vs Erlen\nR² = {r2_scaled:.4f}", fontsize=12, pad=15)
@@ -671,7 +671,7 @@ def plot_mumax_scaling(params):
     cbar = plt.colorbar(im, ax=ax3)
     cbar.set_label("Relative error (%)", fontsize=11)
 
-    ax3.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11)
+    ax3.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=11)
     ax3.set_ylabel("$C_0$", fontsize=11)
     ax3.set_title("Relative error: (Erlen - Scaled Plate) / Erlen", fontsize=12)
 
@@ -930,7 +930,7 @@ def plot_individual_figures(params):
 
     # Axes labels with increased labelpad
     ax1.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax1.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     # Z-axis label horizontal above the axis
@@ -982,7 +982,7 @@ def plot_individual_figures(params):
 
     # Axes labels with increased labelpad
     ax2.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax2.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     # Z-axis label horizontal above the axis
@@ -1041,7 +1041,7 @@ def plot_individual_figures(params):
     cbar3.set_label("Relative error (%)", fontsize=FONT_CBAR, labelpad=10)
     cbar3.ax.tick_params(labelsize=FONT_CBAR_TICK)
 
-    ax3.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D)
+    ax3.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D)
     ax3.set_ylabel("$C_0$", fontsize=FONT_LABEL_2D)
     # ax3.set_title(f'$N_{{max}}$ Relative error: (Erlen - Scaled Plate) / Erlen\n$\\alpha$ = {alpha_opt:.4f}', fontsize=FONT_TITLE_2D)
     ax3.tick_params(labelsize=FONT_TICK_2D)
@@ -1066,7 +1066,7 @@ def plot_individual_figures(params):
 
     # Axes labels with increased labelpad
     ax4.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax4.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     # Z-axis label horizontal above the axis
@@ -1117,7 +1117,7 @@ def plot_individual_figures(params):
 
     # Axes labels with increased labelpad
     ax5.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax5.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     # Z-axis label horizontal above the axis
@@ -1173,7 +1173,7 @@ def plot_individual_figures(params):
     cbar6.set_label("Relative error (%)", fontsize=FONT_CBAR, labelpad=10)
     cbar6.ax.tick_params(labelsize=FONT_CBAR_TICK)
 
-    ax6.set_xlabel(r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D)
+    ax6.set_xlabel(r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D)
     ax6.set_ylabel("$C_0$", fontsize=FONT_LABEL_2D)
     # ax6.set_title(f'$\\mu_{{max}}$ Relative error: (Erlen - Scaled Plate) / Erlen\n$s_L$ = {s_L_opt:.4f}, $z$ = {z_opt:.4f}', fontsize=FONT_TITLE_2D)
     ax6.tick_params(labelsize=FONT_TICK_2D)
@@ -1445,7 +1445,7 @@ def plot_scaled_plate_vs_erlen_data(params):
         )
 
     ax_mu.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax_mu.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     ax_mu.zaxis.set_rotate_label(False)
@@ -1559,7 +1559,7 @@ def plot_scaled_plate_vs_erlen_data(params):
         )
 
     ax_n.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax_n.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     ax_n.zaxis.set_rotate_label(False)
@@ -2035,7 +2035,7 @@ def plot_plate_erlen_points_comparison(params):
         )
 
     ax_mu.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax_mu.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     ax_mu.zaxis.set_rotate_label(False)
@@ -2138,7 +2138,7 @@ def plot_plate_erlen_points_comparison(params):
         )
 
     ax_n.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=30
     )
     ax_n.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=30)
     ax_n.zaxis.set_rotate_label(False)

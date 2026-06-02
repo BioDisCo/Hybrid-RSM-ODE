@@ -2996,7 +2996,7 @@ def create_full_rsm_panel(df, output_dir, df_all_conditions=None):
             )
 
     ax_3d_mu.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=10
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=10
     )
     ax_3d_mu.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=10)
     ax_3d_mu.set_zlabel(
@@ -3083,7 +3083,7 @@ def create_full_rsm_panel(df, output_dir, df_all_conditions=None):
             )
 
     ax_3d_N.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=10
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_3D, labelpad=10
     )
     ax_3d_N.set_ylabel("$C_0$", fontsize=FONT_LABEL_3D, labelpad=10)
     ax_3d_N.set_zlabel(
@@ -3188,7 +3188,7 @@ def create_full_rsm_panel(df, output_dir, df_all_conditions=None):
             )
 
     ax_2d_mu.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D
     )
     ax_2d_mu.set_ylabel(r"$\mu_{\mathrm{max}}$ (h$^{-1}$)", fontsize=FONT_LABEL_2D)
 
@@ -3304,7 +3304,7 @@ def create_full_rsm_panel(df, output_dir, df_all_conditions=None):
             ax_2d_N.plot(L0_curve, N_curve, "-", color=color, linewidth=2, alpha=0.9)
 
     ax_2d_N.set_xlabel(
-        r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D
+        r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_2D
     )
     ax_2d_N.set_ylabel(
         r"$N_{\mathrm{max}}$ (cells mL$^{-1}$ × $10^7$)", fontsize=FONT_LABEL_2D
@@ -3462,7 +3462,7 @@ def create_full_rsm_panel(df, output_dir, df_all_conditions=None):
         ax.grid(True, alpha=0.15, linestyle=":", linewidth=0.5, color="gray")
 
         ax.set_xlabel(
-            r"$L_0$ (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_SENS
+            r"Light intensity (µmol$_{h\nu}$ m$^{-2}$ s$^{-1}$)", fontsize=FONT_LABEL_SENS
         )
         if idx == 0:
             ax.set_ylabel(r"$C_0$", fontsize=FONT_LABEL_SENS)
